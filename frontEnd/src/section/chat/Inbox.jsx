@@ -1,3 +1,4 @@
+import DropDown from '../../components/DropDown'
 import User01 from '../../images/user/user-01.png'
 import {
   DotsThree,
@@ -26,7 +27,7 @@ export default function Inbox () {
           </div>
         </div>
         <div>
-          <DotsThree weight='bold' size={24} />
+          <DropDown/>
         </div>
       </div>
       {/* list of messages */}
