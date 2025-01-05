@@ -1,7 +1,6 @@
 import DropDown from '../../components/DropDown'
 import User01 from '../../images/user/user-01.png'
 import {
-  DotsThree,
   PaperPlaneTilt,
   LinkSimple,
   Smiley
