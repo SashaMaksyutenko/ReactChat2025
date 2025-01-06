@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import Logo from '../../components/Logo'
-import LoginIllustration from '../../images/auth/login.svg'
-import { EnvelopeSimple, Lock } from '@phosphor-icons/react'
+import SignupIllustration from '../../images/auth/signup.svg'
+import { EnvelopeSimple, Lock, User } from '@phosphor-icons/react'
 
-export default function Login () {
+export default function Signup () {
   return (
     <div className='border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark h-screen'>
       <div className='flex flex-wrap items-center h-full'>
@@ -13,14 +13,13 @@ export default function Login () {
               <Logo />
             </Link>
             <p className='2xl:px-20'>
-              Hey there 👋, Welcome Back. Login to chat with your friends &
-              colleagues
+              Join Chat & experience the modern way to connect with people
             </p>
             <span className='mt-15 inline-block'>
               <img
-                src={LoginIllustration}
+                src={SignupIllustration}
                 alt='login'
-                className='h-115 w-auto object-cover object-center'
+                className='w-64 h-auto object-cover object-center'
               />
             </span>
           </div>
@@ -29,9 +28,28 @@ export default function Login () {
           <div className='w-full p-4 sm:p-12.5 xl:p-17.5'>
             <span className='mb-1.5 block font-medium'>Start for free</span>
             <h2 className='mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2'>
-              Sign In to Chat
+              Sign Up to Chat
             </h2>
             <form action=''>
+              <div className='mb-4'>
+                <label
+                  htmlFor=''
+                  className='mb-2.5 block font-medium text-black dark:text-white'
+                >
+                  Name
+                </label>
+                <div className='relative'>
+                  <input
+                    type='text'
+                    placeholder='Enter your fullname'
+                    className='w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary
+                focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary'
+                  />
+                  <span className='absolute right-4 top-4'>
+                    <User size={24} />
+                  </span>
+                </div>
+              </div>
               <div className='mb-4'>
                 <label
                   htmlFor=''
@@ -51,7 +69,7 @@ export default function Login () {
                   </span>
                 </div>
               </div>
-              <div className='mb-6'>
+              <div className='mb-4'>
                 <label
                   htmlFor=''
                   className='mb-2.5 block font-medium text-black dark:text-white'
@@ -61,7 +79,26 @@ export default function Login () {
                 <div className='relative'>
                   <input
                     type='password'
-                    placeholder='6+ characters, 1 Capital letter'
+                    placeholder='Enter your password'
+                    className='w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary
+                focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary'
+                  />
+                  <span className='absolute right-4 top-4'>
+                    <Lock size={24} />
+                  </span>
+                </div>
+              </div>
+              <div className='mb-6'>
+                <label
+                  htmlFor=''
+                  className='mb-2.5 block font-medium text-black dark:text-white'
+                >
+                  Re-Type Password
+                </label>
+                <div className='relative'>
+                  <input
+                    type='password'
+                    placeholder='Retype your password'
                     className='w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary
                 focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary'
                   />
@@ -73,7 +110,7 @@ export default function Login () {
               <div className='mb-5'>
                 <input
                   type='submit'
-                  value='Sign In'
+                  value='Create Account'
                   className='w-full cursor-pointer border border-primary bg-primary p-4 rounded-lg text-white transition hover:bg-opacity-90 '
                 />
               </div>
@@ -111,13 +148,13 @@ export default function Login () {
                     </defs>
                   </svg>
                 </span>
-                Sign in with Google
+                Sign up with Google
               </button>
               <div className='mt-6 text-center'>
                 <p>
-                  Don't have any account? {''}
-                  <Link to='/auth/signup' className='text-primary'>
-                    Sign up
+                  Already have an account? {''}
+                  <Link to='/auth/login' className='text-primary'>
+                    Sign in
                   </Link>
                 </p>
               </div>
