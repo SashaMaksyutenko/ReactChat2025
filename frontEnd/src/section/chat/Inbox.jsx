@@ -1,9 +1,9 @@
 import DropDown from '../../components/DropDown'
+import EmojiPicker from '../../components/EmojiPicker'
 import User01 from '../../images/user/user-01.png'
 import {
   PaperPlaneTilt,
-  LinkSimple,
-  Smiley
+  LinkSimple
 } from '@phosphor-icons/react'
 export default function Inbox () {
   return (
@@ -59,7 +59,7 @@ export default function Inbox () {
                 <LinkSimple size={20} />
               </button>
               <button className='hover:text-primary'>
-                <Smiley size={20} />
+                <EmojiPicker/>
               </button>
             </div>
           </div>
