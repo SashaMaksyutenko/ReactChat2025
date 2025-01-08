@@ -7,10 +7,17 @@ import {
   PaperPlaneTilt,
   LinkSimple,
   VideoCamera,
-  Phone
+  Phone,
+  Gif
 } from '@phosphor-icons/react'
+import Giphy from '../../components/Giphy'
 export default function Inbox () {
   const [userInfoOpen, setUserInfoOpen] = useState(false)
+  const [gifOpen, setGifOpen] = useState(false)
+  const handleToggleGif = (e) => {
+    e.preventDefault()
+    setGifOpen(prev => !prev)
+  }
   const handleToggleUserInfo = () => {
     setUserInfoOpen(prev => !prev)
   }
@@ -80,6 +87,9 @@ export default function Inbox () {
                 <button className='hover:text-primary'>
                   <LinkSimple size={20} />
                 </button>
+                <button onClick={handleToggleGif}>
+                  <Gif size={20} />
+                </button>
                 <button className='hover:text-primary'>
                   <EmojiPicker />
                 </button>
@@ -89,6 +99,7 @@ export default function Inbox () {
               <PaperPlaneTilt size={24} weight='bold' />
             </button>
           </form>
+          {gifOpen && <Giphy />}
         </div>
       </div>
       {userInfoOpen && (
