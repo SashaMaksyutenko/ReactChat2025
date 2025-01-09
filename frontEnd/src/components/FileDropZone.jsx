@@ -11,11 +11,11 @@ export default function FileDropZone ({
   const formRef = useRef(null)
   useEffect(() => {
     Dropzone.autoDiscover = false
-    if (!dropzoneRef.current && !formRef.current) {
+    if (!dropzoneRef.current && formRef.current) {
       dropzoneRef.current = new Dropzone(formRef.current, {
         url,
         acceptedFiles,
-        maxFileSize: maxFileSize / (1024 * 1024) //expected max file size in MB
+        maxFilesize: maxFileSize / (1024 * 1024) //expected max file size in MB
       })
     }
     return () => {

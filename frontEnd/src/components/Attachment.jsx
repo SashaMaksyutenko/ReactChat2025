@@ -1,8 +1,9 @@
+
 import { File, Image, Paperclip } from '@phosphor-icons/react'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { ToggleDocumentModal, ToggleMediaModal } from '../redux/slices/app'
-export default function Attachment () {
+export default function Attachment() {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const trigger = useRef(null)
   const dropdown = useRef(null)
@@ -31,8 +32,8 @@ export default function Attachment () {
   })
   return (
     <div className='relative flex'>
-      <button
-        className='text-[98A6AD] hover:text-body'
+      <div
+        className='text-[98A6AD] hover:text-body cursor-pointer'
         ref={trigger}
         onClick={e => {
           e.preventDefault()
@@ -40,7 +41,7 @@ export default function Attachment () {
         }}
       >
         <Paperclip weight='bold' size={20} />
-      </button>
+      </div>
       <div
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
@@ -49,24 +50,24 @@ export default function Attachment () {
           dropdownOpen === true ? 'block' : 'hidden'
         }`}
       >
-        <button
+        <div
           onClick={() => {
             dispatch(ToggleMediaModal(true))
           }}
-          className='flex w-full items-center gap-2 rounded-sm px-4 py-1.5 text-left text-sm hover:bg-gray dark:hover:bg-meta-4'
+          className='flex w-full items-center gap-2 rounded-sm px-4 py-1.5 text-left text-sm hover:bg-gray dark:hover:bg-meta-4 cursor-pointer'
         >
           <Image size={20} />
           Images & Videos
-        </button>
-        <button
+        </div>
+        <div
           onClick={() => {
             dispatch(ToggleDocumentModal(true))
           }}
-          className='flex w-full items-center gap-2 rounded-sm px-4 py-1.5 text-left text-sm hover:bg-gray dark:hover:bg-meta-4'
+          className='flex w-full items-center gap-2 rounded-sm px-4 py-1.5 text-left text-sm hover:bg-gray dark:hover:bg-meta-4 cursor-pointer'
         >
           <File size={20} />
           Files & Documents
-        </button>
+        </div>
       </div>
     </div>
   )

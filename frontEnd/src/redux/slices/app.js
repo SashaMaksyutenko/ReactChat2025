@@ -23,7 +23,7 @@ const slice = createSlice({
     updateMediaModal: (state, action) => {
       state.modals.media = action.payload
     },
-    updateDocumetModal: (state, action) => {
+    updateDocumentModal: (state, action) => {
       state.modals.doc = action.payload
     }
   }
@@ -41,3 +41,5 @@ export const ToggleMediaModal = value => async (dispatch, getState) => {
 export const ToggleDocumentModal = value => async (dispatch, getState) => {
   dispatch(slice.actions.updateDocumentModal(value))
 }
+
+
