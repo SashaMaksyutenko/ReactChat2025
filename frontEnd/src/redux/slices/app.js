@@ -3,7 +3,9 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   modals: {
     gif: false,
-    audio:false
+    audio: false,
+    media: false,
+    doc: false
   },
   selectedGifUrl: ''
 }
@@ -17,6 +19,12 @@ const slice = createSlice({
     },
     updateAudioModal: (state, action) => {
       state.modals.audio = action.payload
+    },
+    updateMediaModal: (state, action) => {
+      state.modals.media = action.payload
+    },
+    updateDocumetModal: (state, action) => {
+      state.modals.doc = action.payload
     }
   }
 })
@@ -26,4 +34,10 @@ export const ToggleGifModal = value => async (dispatch, getState) => {
 }
 export const ToggleAudioModal = value => async (dispatch, getState) => {
   dispatch(slice.actions.updateAudioModal(value))
+}
+export const ToggleMediaModal = value => async (dispatch, getState) => {
+  dispatch(slice.actions.updateMediaModal(value))
+}
+export const ToggleDocumentModal = value => async (dispatch, getState) => {
+  dispatch(slice.actions.updateDocumentModal(value))
 }

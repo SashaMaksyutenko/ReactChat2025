@@ -1,9 +1,12 @@
 import { File, Image, Paperclip } from '@phosphor-icons/react'
 import { useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { ToggleDocumentModal, ToggleMediaModal } from '../redux/slices/app'
 export default function Attachment () {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const trigger = useRef(null)
   const dropdown = useRef(null)
+  const dispatch = useDispatch()
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!dropdown.current) return
@@ -46,11 +49,21 @@ export default function Attachment () {
           dropdownOpen === true ? 'block' : 'hidden'
         }`}
       >
-        <button className='flex w-full items-center gap-2 rounded-sm px-4 py-1.5 text-left text-sm hover:bg-gray dark:hover:bg-meta-4'>
+        <button
+          onClick={() => {
+            dispatch(ToggleMediaModal(true))
+          }}
+          className='flex w-full items-center gap-2 rounded-sm px-4 py-1.5 text-left text-sm hover:bg-gray dark:hover:bg-meta-4'
+        >
           <Image size={20} />
           Images & Videos
         </button>
-        <button className='flex w-full items-center gap-2 rounded-sm px-4 py-1.5 text-left text-sm hover:bg-gray dark:hover:bg-meta-4'>
+        <button
+          onClick={() => {
+            dispatch(ToggleDocumentModal(true))
+          }}
+          className='flex w-full items-center gap-2 rounded-sm px-4 py-1.5 text-left text-sm hover:bg-gray dark:hover:bg-meta-4'
+        >
           <File size={20} />
           Files & Documents
         </button>
