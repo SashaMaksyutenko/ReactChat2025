@@ -1,6 +1,6 @@
-import { DotsThree, PencilSimple, Trash } from '@phosphor-icons/react'
+import { File, Image, Paperclip } from '@phosphor-icons/react'
 import { useEffect, useRef, useState } from 'react'
-export default function DropDown () {
+export default function Attachment () {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const trigger = useRef(null)
   const dropdown = useRef(null)
@@ -20,7 +20,7 @@ export default function DropDown () {
   })
   useEffect(() => {
     const keyHandler = ({ keyCode }) => {
-      if (!dropdownOpen || keyCode !== 27) return;
+      if (!dropdownOpen || keyCode !== 27) return
       setDropdownOpen(false)
     }
     document.addEventListener('keydown', keyHandler)
@@ -31,25 +31,28 @@ export default function DropDown () {
       <button
         className='text-[98A6AD] hover:text-body'
         ref={trigger}
-        onClick={() => setDropdownOpen(prev => !prev)}
+        onClick={e => {
+          e.preventDefault()
+          setDropdownOpen(prev => !prev)
+        }}
       >
-        <DotsThree weight='bold' size={24} />
+        <Paperclip weight='bold' size={20} />
       </button>
       <div
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute right-0 top-full z-40 w-40 space-y-1 rounded-sm border border-stroke bg-white p-1.5 shadow-default dark:border-strokedark dark:bg-strokedark ${
+        className={`absolute right-0 -top-24 z-40 w-54 space-y-1 rounded-sm border border-stroke bg-white p-1.5 shadow-default dark:border-strokedark dark:bg-strokedark ${
           dropdownOpen === true ? 'block' : 'hidden'
         }`}
       >
         <button className='flex w-full items-center gap-2 rounded-sm px-4 py-1.5 text-left text-sm hover:bg-gray dark:hover:bg-meta-4'>
-          <PencilSimple size={20} />
-          Edit
+          <Image size={20} />
+          Images & Videos
         </button>
         <button className='flex w-full items-center gap-2 rounded-sm px-4 py-1.5 text-left text-sm hover:bg-gray dark:hover:bg-meta-4'>
-          <Trash size={20} />
-          Delete
+          <File size={20} />
+          Files & Documents
         </button>
       </div>
     </div>

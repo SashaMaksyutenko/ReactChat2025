@@ -6,7 +6,6 @@ import UserInfo from './UserInfo'
 import { useDispatch } from 'react-redux'
 import {
   PaperPlaneTilt,
-  LinkSimple,
   VideoCamera,
   Phone,
   Gif,
@@ -14,6 +13,7 @@ import {
 } from '@phosphor-icons/react'
 import Giphy from '../../components/Giphy'
 import { ToggleAudioModal } from '../../redux/slices/app'
+import Attachment from '../../components/Attachment'
 export default function Inbox () {
   const dispatch = useDispatch()
   const [userInfoOpen, setUserInfoOpen] = useState(false)
@@ -95,8 +95,10 @@ export default function Inbox () {
                 <button onClick={handleMicClick} className='hover:text-primary'>
                   <Microphone size={20} />
                 </button>
-                <button className='hover:text-primary'>
-                  <LinkSimple size={20} />
+                <button
+                  className='hover:text-primary'
+                >
+                  <Attachment />
                 </button>
                 <button onClick={handleToggleGif}>
                   <Gif size={20} />
