@@ -1,6 +1,7 @@
 import 'react'
 import { ChatList, MessageInbox, Sidebar } from '../section/chat'
 import GifModal from '../components/GifModal'
+import VoiceRecorder from '../components/VoiceRecorder'
 export default function Messages() {
   return (
     <div className='h-screen overflow-hidden'>
@@ -13,6 +14,7 @@ export default function Messages() {
         <MessageInbox/>
       </div>
       <GifModal/>
+      <VoiceRecorder/>
     </div>
   )
 }

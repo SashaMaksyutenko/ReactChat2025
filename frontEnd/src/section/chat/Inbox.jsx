@@ -3,23 +3,31 @@ import DropDown from '../../components/DropDown'
 import EmojiPicker from '../../components/EmojiPicker'
 import User01 from '../../images/user/user-01.png'
 import UserInfo from './UserInfo'
+import { useDispatch } from 'react-redux'
 import {
   PaperPlaneTilt,
   LinkSimple,
   VideoCamera,
   Phone,
-  Gif
+  Gif,
+  Microphone
 } from '@phosphor-icons/react'
 import Giphy from '../../components/Giphy'
+import { ToggleAudioModal } from '../../redux/slices/app'
 export default function Inbox () {
+  const dispatch = useDispatch()
   const [userInfoOpen, setUserInfoOpen] = useState(false)
   const [gifOpen, setGifOpen] = useState(false)
-  const handleToggleGif = (e) => {
+  const handleToggleGif = e => {
     e.preventDefault()
     setGifOpen(prev => !prev)
   }
   const handleToggleUserInfo = () => {
     setUserInfoOpen(prev => !prev)
+  }
+  const handleMicClick = e => {
+    e.preventDefault()
+    dispatch(ToggleAudioModal(true))
   }
   return (
     <>
@@ -84,6 +92,9 @@ export default function Inbox () {
                 className='h-13 w-full rounded-md border border-stroke bg-gray pl-5 pr-19 text-black placeholder-body outline-none focus:border-primary dark:border-strokedark dark:bg-boxdark-2 dark:text-white'
               />
               <div className='absolute right-5 top-1/2 -translate-y-1/2 items-center justify-end space-x-4'>
+                <button onClick={handleMicClick} className='hover:text-primary'>
+                  <Microphone size={20} />
+                </button>
                 <button className='hover:text-primary'>
                   <LinkSimple size={20} />
                 </button>
