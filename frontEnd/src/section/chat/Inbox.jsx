@@ -14,6 +14,7 @@ import {
 import Giphy from '../../components/Giphy'
 import { ToggleAudioModal } from '../../redux/slices/app'
 import Attachment from '../../components/Attachment'
+import MsgSeparator from '../../components/MsgSeparator'
 export default function Inbox () {
   const dispatch = useDispatch()
   const [userInfoOpen, setUserInfoOpen] = useState(false)
@@ -81,6 +82,33 @@ export default function Inbox () {
             </div>
             <p className='text-xs'>19:35pm</p>
           </div>
+          <MsgSeparator/>
+          <div className='max-w-125'>
+            <p className='mb-2.5 text-sm font-medium'>Andri Thomas</p>
+            <div className='mb-2.5 rounded-2xl rounded-tl-none bg-gray px-5 py-3 dark:bg-boxdark-2'>
+              <p>So what?</p>
+            </div>
+            <p className='text-xs'>20:20pm</p>
+          </div>
+          <div className='max-w-125 ml-auto'>
+            <div className='mb-2.5 rounded-2xl rounded-br-none bg-primary px-5 py-3'>
+              <p className='text-white'>Victor calling!!!</p>
+            </div>
+            <p className='text-xs'>20:35pm</p>
+          </div>
+          <div className='max-w-125'>
+            <p className='mb-2.5 text-sm font-medium'>Andri Thomas</p>
+            <div className='mb-2.5 rounded-2xl rounded-tl-none bg-gray px-5 py-3 dark:bg-boxdark-2'>
+              <p>I'm not scared. Dont go there</p>
+            </div>
+            <p className='text-xs'>20:50pm</p>
+          </div>
+          <div className='max-w-125 ml-auto'>
+            <div className='mb-2.5 rounded-2xl rounded-br-none bg-primary px-5 py-3'>
+              <p className='text-white'>I better stay at home</p>
+            </div>
+            <p className='text-xs'>21:00pm</p>
+          </div>
         </div>
         {/* input */}
         <div className='sticky bottom-0 border-t border-stroke bg-white px-6 py-5 dark:border-strokedark dark:bg-boxdark'>
@@ -95,9 +123,7 @@ export default function Inbox () {
                 <button onClick={handleMicClick} className='hover:text-primary'>
                   <Microphone size={20} />
                 </button>
-                <button
-                  className='hover:text-primary'
-                >
+                <button className='hover:text-primary'>
                   <Attachment />
                 </button>
                 <button onClick={handleToggleGif}>
