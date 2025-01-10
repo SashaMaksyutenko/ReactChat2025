@@ -16,6 +16,7 @@ import { ToggleAudioModal } from '../../redux/slices/app'
 import Attachment from '../../components/Attachment'
 import MsgSeparator from '../../components/MsgSeparator'
 import TypingIndicator from '../../components/TypingIndicator'
+import { TextMessage } from '../../components/Messages'
 export default function Inbox () {
   const dispatch = useDispatch()
   const [userInfoOpen, setUserInfoOpen] = useState(false)
@@ -67,13 +68,13 @@ export default function Inbox () {
         </div>
         {/* list of messages */}
         <div className='max-h-full space-y-3.5 overflow-auto no-scrollbar px-6 py-7.5 grow'>
-          <div className='max-w-125'>
-            <p className='mb-2.5 text-sm font-medium'>Andri Thomas</p>
-            <div className='mb-2.5 rounded-2xl rounded-tl-none bg-gray px-5 py-3 dark:bg-boxdark-2'>
-              <p>I want to drink some Volfas</p>
-            </div>
-            <p className='text-xs'>19:30pm</p>
-          </div>
+          <TextMessage
+            author='Sasha'
+            content='Hi. Take a look at this link-> https://www.npmjs.com/'
+            read_receipt='sent'
+            incoming={true}
+            timestamp='2:44pm'
+          />
           <div className='max-w-125 ml-auto'>
             <div className='mb-2.5 rounded-2xl rounded-br-none bg-primary px-5 py-3'>
               <p className='text-white'>
@@ -83,7 +84,7 @@ export default function Inbox () {
             </div>
             <p className='text-xs'>19:35pm</p>
           </div>
-          <MsgSeparator/>
+          <MsgSeparator />
           <div className='max-w-125'>
             <p className='mb-2.5 text-sm font-medium'>Andri Thomas</p>
             <div className='mb-2.5 rounded-2xl rounded-tl-none bg-gray px-5 py-3 dark:bg-boxdark-2'>
@@ -110,7 +111,7 @@ export default function Inbox () {
             </div>
             <p className='text-xs'>21:00pm</p>
           </div>
-          <TypingIndicator/>
+          <TypingIndicator />
         </div>
         {/* input */}
         <div className='sticky bottom-0 border-t border-stroke bg-white px-6 py-5 dark:border-strokedark dark:bg-boxdark'>
