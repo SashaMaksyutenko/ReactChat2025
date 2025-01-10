@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import WaveSurfer from 'wavesurfer.js'
 import AudioFile from '../assets/audio/file_example.mp3'
+import { Pause, Play } from '@phosphor-icons/react'
 export default function Waveform (props) {
   const { incoming } = props
   const waveformRef = useRef(null)
@@ -42,6 +43,18 @@ export default function Waveform (props) {
           ctx.closePath()
         }
       })
+      ws.on('ready', () => {
+        const totalDuration = ws.getDuration()
+        setDuration(formatTime(totalDuration))
+      })
+      ws.on('audioprocess', () => {
+        const currentTime = ws.getCurrentTime()
+        setCurrentTime(formatTime(currentTime))
+      })
+      ws.on('finish', () => {
+        setIsPlaying(false)
+        setCurrentTime(formatTime(0))
+      })
       setWavesurfer(ws)
       return () => {
         ws.destroy()
@@ -50,7 +63,7 @@ export default function Waveform (props) {
   }, [])
   const formatTime = time => {
     const minutes = Math.floor(time / 60)
-    const seconds = Math.floot(time % 60)
+    const seconds = Math.floor(time % 60)
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
   }
   const handePlayPause = () => {
@@ -63,5 +76,32 @@ export default function Waveform (props) {
       setIsPlaying(!isPlaying)
     }
   }
-  return <div></div>
+  return (
+    <div
+      className={`flex flex-row items-center space-x-6 p-2 rounded-md ${
+        !incoming ? 'bg-transparent' : 'bg-gray-3 bg-boxdark'
+      }`}
+    >
+      <button
+        onClick={handePlayPause}
+        className='bg-gray dark:bg-boxdark-2 rounded-full h-18 w-18 flex items-center justify-center shadow-2'
+      >
+        {isPlaying ? (
+          <Pause size={24} weight='bold' />
+        ) : (
+          <Play size={24} weight='bold' />
+        )}
+      </button>
+      <div className='grow flex flex-col space-y-1'>
+        <div
+          className='w-full !z-0'
+          ref={waveformRef}
+          style={{ overflow: 'hidden' }}
+        ></div>
+        <div className='text-sm'>
+          {currentTime} / {duration}
+        </div>
+      </div>
+    </div>
+  )
 }
