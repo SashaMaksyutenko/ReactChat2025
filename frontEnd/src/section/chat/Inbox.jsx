@@ -71,15 +71,14 @@ export default function Inbox () {
           <TextMessage
             author='Sasha'
             content='Hi. Take a look at this link-> https://www.npmjs.com/'
-            read_receipt='sent'
-            incoming={true}
+            read_receipt='read'
+            incoming={false}
             timestamp='2:44pm'
           />
           <div className='max-w-125 ml-auto'>
             <div className='mb-2.5 rounded-2xl rounded-br-none bg-primary px-5 py-3'>
               <p className='text-white'>
-                Awesome. Why the hell not? Me to. Just get it and we will drink
-                it with our friend Sharynya.
+                Ok. I will check it out later. Thanks for sharing with me this resourse
               </p>
             </div>
             <p className='text-xs'>19:35pm</p>

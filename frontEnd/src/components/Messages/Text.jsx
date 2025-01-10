@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Check, Checks } from '@phosphor-icons/react'
 import extractLinks from '../../utils/extractLinks'
 import Microlink from '@microlink/react'
 export default function Text ({
@@ -31,7 +32,22 @@ export default function Text ({
           <Microlink style={{ width: '100%' }} url={links[0]} />
         )}
       </div>
-      <p className='text-xs'>{timestamp}</p>
+      <div className='flex flex-row items-center justify-end space-x-2'>
+        <div
+          className={`${
+            read_receipt !== 'read'
+              ? 'text-body dark:text-white'
+              : 'text-primary'
+          }`}
+        >
+          {read_receipt !== 'sent' ? (
+            <Checks weight='bold' size={18} />
+          ) : (
+            <Check weight='bold' size={18} />
+          )}
+        </div>
+        <p className='text-xs'>{timestamp}</p>
+      </div>
     </div>
   )
 }
