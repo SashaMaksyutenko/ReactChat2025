@@ -15,6 +15,7 @@ import Giphy from '../../components/Giphy'
 import { ToggleAudioModal } from '../../redux/slices/app'
 import Attachment from '../../components/Attachment'
 import MsgSeparator from '../../components/MsgSeparator'
+import TypingIndicator from '../../components/TypingIndicator'
 export default function Inbox () {
   const dispatch = useDispatch()
   const [userInfoOpen, setUserInfoOpen] = useState(false)
@@ -99,7 +100,7 @@ export default function Inbox () {
           <div className='max-w-125'>
             <p className='mb-2.5 text-sm font-medium'>Andri Thomas</p>
             <div className='mb-2.5 rounded-2xl rounded-tl-none bg-gray px-5 py-3 dark:bg-boxdark-2'>
-              <p>I'm not scared. Dont go there</p>
+              <p>I`m not scared. Dont go there</p>
             </div>
             <p className='text-xs'>20:50pm</p>
           </div>
@@ -109,6 +110,7 @@ export default function Inbox () {
             </div>
             <p className='text-xs'>21:00pm</p>
           </div>
+          <TypingIndicator/>
         </div>
         {/* input */}
         <div className='sticky bottom-0 border-t border-stroke bg-white px-6 py-5 dark:border-strokedark dark:bg-boxdark'>
