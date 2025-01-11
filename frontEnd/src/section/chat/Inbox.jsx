@@ -22,10 +22,19 @@ import {
   TextMessage,
   VoiceMessage
 } from '../../components/Messages'
+import VideoRoom from '../../components/VideoRoom'
 export default function Inbox () {
   const dispatch = useDispatch()
   const [userInfoOpen, setUserInfoOpen] = useState(false)
-  const [gifOpen, setGifOpen] = useState(false)
+  const [gifOpen, setGifOpen] = useState(false) 
+  const [videoCall,setVideoCall]=useState(false)
+  const [audioCall,setAudioCall]=useState(false)
+  const handleToggleVideo=()=>{
+    setVideoCall((p)=>!p)
+  }
+  const handleToggleAudio=()=>{
+    setAudioCall((p)=>!p)
+  }
   const handleToggleGif = e => {
     e.preventDefault()
     setGifOpen(prev => !prev)
@@ -62,10 +71,10 @@ export default function Inbox () {
             </div>
           </div>
           <div className='flex flex-row items-center space-x-8'>
-            <button>
+            <button onClick={handleToggleVideo}>
               <VideoCamera size={24} />
             </button>
-            <button>
+            <button onClick={handleToggleAudio}>
               <Phone size={24} />
             </button>
             <DropDown />
@@ -168,6 +177,7 @@ export default function Inbox () {
           {gifOpen && <Giphy />}
         </div>
       </div>
+      {videoCall && <VideoRoom open={videoCall} handleClose={handleToggleVideo}/>}
       {userInfoOpen && (
         <div className='w-1/4 '>
           <UserInfo handleToggleUserInfo={handleToggleUserInfo} />

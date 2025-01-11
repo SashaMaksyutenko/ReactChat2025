@@ -2,7 +2,6 @@ import { PaperPlaneTilt, X } from '@phosphor-icons/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ToggleGifModal } from '../redux/slices/app'
 import { useRef, useEffect } from 'react'
-
 export default function GifModal () {
   const modalRef = useRef(null)
   const dispatch = useDispatch()
