@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../../components/Logo'
 
 export default function Verification () {
+  const navigate = useNavigate()
   return (
     <div className='overflow-hidden px-4 dark:bg-boxdark-2 sm:px-8'>
       <div className='flex h-screen flex-col items-center justify-center overflow-hidden'>
@@ -33,7 +34,9 @@ export default function Verification () {
                     <div>Did not receive a code? </div>
                     <button className='text-primary'>Recend</button>
                   </p>
-                  <button className='flex w-full justify-center rounded-md bg-primary p-[13px] font-bold text-gray hover:bg-opacity-90'>
+                  <button onClick={() => {
+                    navigate('/dashboard')
+                  }} className='flex w-full justify-center rounded-md bg-primary p-[13px] font-bold text-gray hover:bg-opacity-90'>
                     Verify
                   </button>
                   <span className='mt-5 block text-red'>

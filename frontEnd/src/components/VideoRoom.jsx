@@ -28,7 +28,7 @@ export default function VideoRoom ({ open, handleClose }) {
           {/* Video Feed Grid */}
           <div className='grid grid-cols-2 gap-4 h-50 mb-4'>
             {/* Video Feed 1 */}
-            <div className='relative h-full w-full bg-gray rounded-md flex items-center justify-center'>
+            <div className='relative h-full w-full bg-gray dark:bg-boxdark-2 rounded-md flex items-center justify-center'>
               <div className='space-y-2'>
                 <img
                   src={User01}
@@ -44,7 +44,7 @@ export default function VideoRoom ({ open, handleClose }) {
               </div>
             </div>
             {/* Video Feed 2 */}
-            <div className='relative h-full w-full bg-gray rounded-md flex items-center justify-center'>
+            <div className='relative h-full w-full bg-gray dark:bg-boxdark-2 rounded-md flex items-center justify-center'>
               <div className='space-y-2'>
                 <img
                   src={User02}
