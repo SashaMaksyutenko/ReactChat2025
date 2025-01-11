@@ -23,17 +23,18 @@ import {
   VoiceMessage
 } from '../../components/Messages'
 import VideoRoom from '../../components/VideoRoom'
+import AudioRoom from '../../components/AudioRoom'
 export default function Inbox () {
   const dispatch = useDispatch()
   const [userInfoOpen, setUserInfoOpen] = useState(false)
-  const [gifOpen, setGifOpen] = useState(false) 
-  const [videoCall,setVideoCall]=useState(false)
-  const [audioCall,setAudioCall]=useState(false)
-  const handleToggleVideo=()=>{
-    setVideoCall((p)=>!p)
+  const [gifOpen, setGifOpen] = useState(false)
+  const [videoCall, setVideoCall] = useState(false)
+  const [audioCall, setAudioCall] = useState(false)
+  const handleToggleVideo = () => {
+    setVideoCall(p => !p)
   }
-  const handleToggleAudio=()=>{
-    setAudioCall((p)=>!p)
+  const handleToggleAudio = () => {
+    setAudioCall(p => !p)
   }
   const handleToggleGif = e => {
     e.preventDefault()
@@ -177,7 +178,13 @@ export default function Inbox () {
           {gifOpen && <Giphy />}
         </div>
       </div>
-      {videoCall && <VideoRoom open={videoCall} handleClose={handleToggleVideo}/>}
+      {videoCall && (
+        <VideoRoom open={videoCall} handleClose={handleToggleVideo} />
+      )}
+      {audioCall && (
+        <AudioRoom open={audioCall} handleClose={handleToggleAudio} />
+      )}
+
       {userInfoOpen && (
         <div className='w-1/4 '>
           <UserInfo handleToggleUserInfo={handleToggleUserInfo} />
