@@ -18,6 +18,7 @@ import MsgSeparator from '../../components/MsgSeparator'
 import TypingIndicator from '../../components/TypingIndicator'
 import {
   DocumentMessage,
+  MediaMessage,
   TextMessage,
   VoiceMessage
 } from '../../components/Messages'
@@ -99,6 +100,14 @@ export default function Inbox () {
             incoming={false}
             read_receipt='delivered'
             timestamp='4:27pm'
+          />
+          <MediaMessage
+            assets={[]}
+            author='Sasha'
+            caption='this is very beautiful car'
+            incoming
+            timestamp={'5:32pm'}
+            read_receipt='read'
           />
           <div className='max-w-125'>
             <p className='mb-2.5 text-sm font-medium'>Andri Thomas</p>
