@@ -1,53 +1,37 @@
-import DarkModeSwitcher from '../../components/DarkModeSwitcher'
 import {
   Chat,
   SignOut,
   UserCircle,
-  Users,
-  DotsThreeCircle,
-  Shapes
+  ChatTeardropText
 } from '@phosphor-icons/react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import DarkModeSwitcher from '../components/DarkModeSwitcher'
 const NAVIGATION = [
   {
     key: 0,
     title: 'DMs',
-    icon: <Chat size={24} />
+    icon: <Chat size={24} />,
+    path: '/dashboard'
   },
   {
     key: 1,
-    title: 'Groups',
-    icon: <Users size={24} />
-  },
-  {
-    key: 2,
     title: 'Profile',
-    icon: <UserCircle size={24} />
-  },
-  {
-    key: 3,
-    title: 'More',
-    icon: <DotsThreeCircle size={24} />
+    icon: <UserCircle size={24} />,
+    path: '/dashboard/profile'
   }
 ]
-
 export default function Sidebar () {
+  const navigate = useNavigate()
   const [selected, setSelected] = useState(0)
   const handleClick = key => {
+    navigate(NAVIGATION[key].path)
     setSelected(key)
   }
   return (
     <div className='flex flex-col border-r border-stroke p-2 dark:border-strokedark'>
-      {/* <div className='mx-auto border rounded-md border-stroke p-2 dark:border-strokedark'>
-        <Chat size={24} />
-      </div> */}
       <div className='flex flex-col items-center space-y-5'>
-        <div className='space-y-2 flex flex-col text-center'>
-          <div className='mx-auto border rounded-md border-stroke p-2 dark:border-strokedark'>
-            <Shapes size={24} />
-          </div>
-          <span className='font-medium text-sm'>Workspace</span>
-        </div>
+        <ChatTeardropText size={32} weight='bold' className='text-primary' />
         {NAVIGATION.map(({ icon, key, title }) => (
           <div
             key={key}
@@ -78,9 +62,14 @@ export default function Sidebar () {
         <div className='flex flex-row items-center justify-center'>
           <DarkModeSwitcher />
         </div>
-        <div className='flex flex-row items-center justify-center border rounded-md border-stroke p-2 dark:border-strokedark hover:bg-stone-100 hover:cursor-pointer'>
+        <button
+          onClick={() => {
+            navigate('/')
+          }}
+          className='flex flex-row items-center justify-center border rounded-md border-stroke p-2 dark:border-strokedark hover:bg-stone-100 hover:cursor-pointer'
+        >
           <SignOut size={24} />
-        </div>
+        </button>
       </div>
     </div>
   )

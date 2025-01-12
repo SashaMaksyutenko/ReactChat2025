@@ -6,7 +6,6 @@ import Verification from './pages/auth/Verification'
 import { useEffect } from 'react'
 import Layout from './layout'
 import ProfilePage from './pages/ProfilePage'
-
 export default function App () {
   useEffect(() => {
     const colorMode = JSON.parse(window.localStorage.getItem('color-theme'))
