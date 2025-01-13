@@ -66,7 +66,7 @@ export default function Sidebar () {
           onClick={() => {
             navigate('/')
           }}
-          className='flex flex-row items-center justify-center border rounded-md border-stroke p-2 dark:border-strokedark hover:bg-stone-100 hover:cursor-pointer'
+          className='w-full flex flex-row items-center justify-center border rounded-md border-stroke p-2 dark:border-strokedark hover:bg-stone-100 hover:cursor-pointer'
         >
           <SignOut size={24} />
         </button>
