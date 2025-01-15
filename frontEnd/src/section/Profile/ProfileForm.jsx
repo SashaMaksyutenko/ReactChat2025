@@ -3,9 +3,9 @@ import UserOne from '../../images/user/user-01.png'
 import { Camera } from '@phosphor-icons/react'
 export default function ProfileForm () {
   return (
-    <div className='flex flex-col w-full p-4 space-y-6'>
+    <div className='flex flex-col w-full p-4 space-y-5'>
       {/* image picker */}
-      <div className='relative z-30 w-full rounded-full p-1 backdrop-blur sm:max-w-36 sm:p-3'>
+      <div className='relative z-30 w-full rounded-full p-1 backdrop-blur sm:max-w-36 sm:p-2'>
         <div className='relative drop-shadow-2'>
           <img
             src={UserOne}
@@ -32,7 +32,7 @@ export default function ProfileForm () {
           <div className='flex flex-col gap-5.5 p-6.5'>
             {/* name */}
             <div>
-              <label className='mb-3 block text-black dark:text-white'>
+              <label className='mb-2 block text-black dark:text-white'>
                 Name
               </label>
               <input
@@ -43,18 +43,18 @@ export default function ProfileForm () {
             </div>
             {/* job title */}
             <div>
-              <label className='mb-3 block text-black dark:text-white'>
-                Job title
+              <label className='mb-2 block text-black dark:text-white'>
+                Job Title
               </label>
               <input
                 type='text'
-                placeholder='Enter your Job Title'
+                placeholder='Enter your job title'
                 className='w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary'
               />
             </div>
             {/* BIO */}
             <div>
-              <label className='mb-3 block text-black dark:text-white'>
+              <label className='mb-2 block text-black dark:text-white'>
                 Bio
               </label>
               <input
@@ -68,7 +68,7 @@ export default function ProfileForm () {
             {/* submit */}
             <button
               type='submit'
-              className='w-full cursor-pointer cursor-pointer rounded-lg border border-primary bg-primary py-3 px-6 text-white transition hover:bg-opacity-90 '
+              className='w-full cursor-pointer cursor-pointer rounded-lg border border-primary bg-primary py-3 px-6 text-white transition hover:bg-opacity-90'
             >
               Submit
             </button>
