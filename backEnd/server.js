@@ -4,7 +4,9 @@ const mongoose = require('mongoose')
 dotenv.config({ path: './config.env' })
 const PORT = process.env.PORT || process.env.API_PORT
 const http = require('http')
+const socketServer = require('./socketServer')
 const server = http.createServer(app)
+socketServer.registerSocketServer(server)
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
