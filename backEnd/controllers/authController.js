@@ -2,6 +2,7 @@ const User = require('../Models/User')
 const catchAsync = require('../utilities/catchAsync')
 const otpGenerator = require('otp-generator')
 const jwt = require('jsonwebtoken')
+const { promisify } = require('util')
 // Sign JWT Token
 const signToken = userId => jwt.sign({ userId }, process.env.TOKEN_KEY)
 // register new user
@@ -61,6 +62,34 @@ exports.sendOTP = catchAsync(async (req, res, next) => {
   )
   // TODO => send otp via mail
   res.status(200).json({
+    status: 'success',
+    message: 'OTP sent successfully'
+  })
+})
+// resend OTP
+exports.resendOTP = catchAsync(async (req, res, next) => {
+  const { email } = req.body
+  const user = await User.findOne({
+    email
+  })
+  if (!user) {
+    return res.status(400).json({
+      status: 'error',
+      message: 'Email is invalid'
+    })
+  }
+  // generate new OTP
+  const new_otp = otpGenerator.generate(4, {
+    upperCaseAlphabets: false,
+    specialChars: false,
+    lowerCaseAlphabets: false
+  })
+  const otp_expiry_time = Date.now() + 10 * 60 * 1000 // 10 minutes after OTP is created
+  user.otp_expiry_time = otp_expiry_time
+  user.otp = new_otp
+  await user.save({})
+  // TODO send OTP via Email
+  return res.status(200).json({
     status: 'success',
     message: 'OTP sent successfully'
   })
@@ -138,3 +167,53 @@ exports.login = catchAsync(async (req, res, next) => {
   })
 })
 // Protect
+exports.protect = catchAsync(async (req, res, next) => {
+  try {
+    // 1) getting token if it exists
+    let token
+    if (
+      req.headers.authorization &&
+      req.headers.authorization.startsWith('Bearer')
+    ) {
+      token = req.headers.authorization.split('')[1]
+    } else if (req.cookies.jwt) {
+      token = req.cookies.jwt
+    }
+    if (!token) {
+      return res.status(401).json({
+        status: 'error',
+        message: 'You are not logged in. Please Log In to access aplication'
+      })
+    }
+    // 2) token verification
+    const decoded = await promisify(jwt.verify)(token, process.env.TOKEN_KEY)
+    console.log(decoded)
+    // 3) Checking if user exists
+    const this_user = await User.findById(decoded.userId)
+    if (!this_user) {
+      return res.status(401).json({
+        status: 'error',
+        message: 'Token does no longer belongs to this user'
+      })
+    }
+    // 4) Checking password changing after token was issued
+    if (this_user.changedPasswordAfter(decoded.iat)) {
+      return res.status(401).json({
+        status: 'error',
+        message: 'The password was changed recently.Please Log In again.'
+      })
+    }
+    // Grant access to protected route
+    req.user = this_user
+    next()
+  } catch (error) {
+    console.log(error)
+    console.log('Protection endpoint failed')
+    return res.status(400).json({
+      status: 'error',
+      message: 'Authentication failed',
+      token,
+      user_id: user._id
+    })
+  }
+})

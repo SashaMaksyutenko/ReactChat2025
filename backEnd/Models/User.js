@@ -8,6 +8,19 @@ const userSchema = new mongoose.Schema(
       required: [true, 'Name is required'],
       trim: true
     },
+    jobTitle: {
+      type: String
+    },
+    bio: {
+      type: String,
+      trim: true
+    },
+    country: {
+      type: String
+    },
+    avatar: {
+      type: String
+    },
     email: {
       type: String,
       required: [true, 'Email is required'],
@@ -39,6 +52,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ['Online', 'Offline'],
       default: 'Offline'
+    },
+    socketId: {
+      type: String
     }
   },
   {
@@ -48,19 +64,15 @@ const userSchema = new mongoose.Schema(
 // PRE SAVE HOOK
 userSchema.pre('save', async function (next) {
   // running this function if only otp modified
-  if (!this.isModified('otp') || this.otp) return next()
-  // Hash otp with cost of 12
-  this.otp = await bcrypt.hash(this.otp.toString(), 12)
-  console.log(this.otp.toString(), 'from PRE SAVE HOOK')
-  next()
-})
-// PRE SAVE HOOK
-userSchema.pre('save', async function (next) {
-  // running this function if only password modified
-  if (!this.isModified('password') || this.password) return next()
-  // Hash password with cost of 12
-  this.password = await bcrypt.hash(this.password.toString(), 12)
-  console.log(this.password.toString(), 'from PRE SAVE HOOK')
+  if (this.isModified('otp') || this.otp) {
+    // Hash otp with cost of 12
+    this.otp = await bcrypt.hash(this.otp.toString(), 12)
+    console.log(this.otp.toString(), 'from PRE SAVE HOOK')
+  }
+  if (this.isModified('password') || this.password) {
+    this.password = await bcrypt.hash(this.password.toString(), 12)
+    console.log(this.password.toString(), 'from PRE SAVE HOOK')
+  }
   next()
 })
 // METHOD
@@ -73,6 +85,14 @@ userSchema.methods.correctPassword = async function (
   userPassword
 ) {
   return await bcrypt.compare(candidatePassword, userPassword)
+}
+// Changing password after token was issued
+userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000)
+    return JWTTimestamp < changedTimestamp
+  }
+  return false
 }
 const User = new mongoose.model('User', userSchema)
 module.exports = User
