@@ -20,25 +20,14 @@ exports.register = catchAsync(async (req, res, next) => {
     })
   } else if (existing_user && existing_user.verified === false) {
     // rewrite document and create new user
-    new_user = await User.findOneAndUpdate(
-      { email: email },
-      {
-        name,
-        password
-      },
-      {
-        new: true,
-        validateModifiedOnly: true
-      }
-    )
-  } else {
-    // if there is no previous record => create new record
-    new_user = await User.create({
-      name,
-      email,
-      password
-    })
+    await user.findOneAndDelete({ email: email })
   }
+  // if there is no previous record => create new record
+  new_user = await User.create({
+    name,
+    email,
+    password
+  })
   req.userId = new_user._id
   next()
 })
@@ -55,13 +44,14 @@ exports.sendOTP = catchAsync(async (req, res, next) => {
   const user = await User.findByIdAndUpdate(
     userId,
     {
-      otp: new_otp.toString(),
       otp_expiry_time: otp_expiry_time
     },
     { new: true, validateModifiedOnly: true }
   )
+  user.otp=new_otp
+  await user.save({})
   // TODO => send otp via mail
-  res.status(200).json({
+  return res.status(200).json({
     status: 'success',
     message: 'OTP sent successfully'
   })
@@ -85,6 +75,7 @@ exports.resendOTP = catchAsync(async (req, res, next) => {
     lowerCaseAlphabets: false
   })
   const otp_expiry_time = Date.now() + 10 * 60 * 1000 // 10 minutes after OTP is created
+  
   user.otp_expiry_time = otp_expiry_time
   user.otp = new_otp
   await user.save({})
@@ -129,7 +120,7 @@ exports.verifyOTP = catchAsync(async (req, res, next) => {
   const token = signToken(user._id)
   return res.status(200).json({
     status: 'success',
-    message: 'OTP verified successfully',
+    message: 'Email verified successfully',
     token,
     user_id: user._id
   })
