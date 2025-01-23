@@ -1,6 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
-const routes=require('./routes/index')
+const routes = require('./routes/index')
 const rateLimit = require('express-rate-limit') //basic rate-limiting middleware for express. Using to limit repeated requests to public APIs and/or endpoints such as password reset
 const helmet = require('helmet') //Helmet helps to secure Express apps by setting various HTTP headers.
 // These headers are set in response by helmet
@@ -33,7 +33,7 @@ const app = express()
 app.use(
   cors({
     origin: '*',
-    methods: ['GET', 'PATCH', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'PATCH', 'POST', 'DELETE', 'PUT'],
     credentials: true
   })
 )

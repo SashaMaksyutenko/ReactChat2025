@@ -49,11 +49,11 @@ exports.sendOTP = catchAsync(async (req, res, next) => {
     },
     { new: true, validateModifiedOnly: true }
   )
-  user.otp=new_otp
+  user.otp = new_otp
   await user.save({})
   // send otp via mail
-  Mailer({name:user.name,email:user.email,otp:new_otp})
-  return res.status(200).json({
+  Mailer({ name: user.name, email: user.email, otp: new_otp })
+  res.status(200).json({
     status: 'success',
     message: 'OTP sent successfully'
   })
@@ -81,8 +81,8 @@ exports.resendOTP = catchAsync(async (req, res, next) => {
   user.otp = new_otp
   await user.save({})
   // send OTP via Email
-  Mailer({name:user.name,email:user.email,otp:new_otp})
-  return res.status(200).json({
+  Mailer({ name: user.name, email: user.email, otp: new_otp })
+  res.status(200).json({
     status: 'success',
     message: 'OTP sent successfully'
   })
@@ -120,7 +120,7 @@ exports.verifyOTP = catchAsync(async (req, res, next) => {
     validateModifiedOnly: true
   })
   const token = signToken(user._id)
-  return res.status(200).json({
+  res.status(200).json({
     status: 'success',
     message: 'Email verified successfully',
     token,
@@ -152,7 +152,7 @@ exports.login = catchAsync(async (req, res, next) => {
     })
   }
   const token = signToken(user._id)
-  return res.status(200).json({
+  res.status(200).json({
     status: 'success',
     message: 'Logged in successfully',
     token,
@@ -202,7 +202,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   } catch (error) {
     console.log(error)
     console.log('Protection endpoint failed')
-    return res.status(400).json({
+    res.status(400).json({
       status: 'error',
       message: 'Authentication failed',
       token,

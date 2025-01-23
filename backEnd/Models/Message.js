@@ -7,12 +7,12 @@
 // date
 // type => Media || Text || Document || Audio || Giphy
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 const documentSchema = new Schema({
   url: { type: String },
   name: { type: String },
   size: { type: Number }
 })
-const Schema = mongoose.Schema
 const messageSchema = new Schema({
   author: {
     type: Schema.Types.ObjectId,

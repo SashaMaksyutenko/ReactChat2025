@@ -51,7 +51,7 @@ exports.updateAvatar = catchAsync(async (req, res, next) => {
       validateModifiedOnly: true
     }
   )
-  return res.status(200).json({
+  res.status(200).json({
     status: 'success',
     message: 'Avatar updated successfully',
     data: {
@@ -73,7 +73,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   user.password = newPassword
   user.passwordChangedAt = Date.now()
   await user.save({})
-  return res.status(200).json({
+  res.status(200).json({
     status: 'success',
     message: 'Password updated successfully'
   })
