@@ -3,6 +3,7 @@ const catchAsync = require('../utilities/catchAsync')
 const otpGenerator = require('otp-generator')
 const jwt = require('jsonwebtoken')
 const { promisify } = require('util')
+const Mailer = require('../services/mailer')
 // Sign JWT Token
 const signToken = userId => jwt.sign({ userId }, process.env.TOKEN_KEY)
 // register new user
@@ -50,7 +51,8 @@ exports.sendOTP = catchAsync(async (req, res, next) => {
   )
   user.otp=new_otp
   await user.save({})
-  // TODO => send otp via mail
+  // send otp via mail
+  Mailer({name:user.name,email:user.email,otp:new_otp})
   return res.status(200).json({
     status: 'success',
     message: 'OTP sent successfully'
@@ -75,11 +77,11 @@ exports.resendOTP = catchAsync(async (req, res, next) => {
     lowerCaseAlphabets: false
   })
   const otp_expiry_time = Date.now() + 10 * 60 * 1000 // 10 minutes after OTP is created
-  
   user.otp_expiry_time = otp_expiry_time
   user.otp = new_otp
   await user.save({})
-  // TODO send OTP via Email
+  // send OTP via Email
+  Mailer({name:user.name,email:user.email,otp:new_otp})
   return res.status(200).json({
     status: 'success',
     message: 'OTP sent successfully'

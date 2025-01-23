@@ -3,7 +3,7 @@ const registerSocketServer = server => {
   const io = require('socket.io')(server, {
     cors: {
       origin: '*',
-      metodd: ['GET', 'POST']
+      method: ['GET', 'POST']
     }
   })
   io.use((socket, next) => {
@@ -12,10 +12,18 @@ const registerSocketServer = server => {
   io.on('connection', socket => {
     console.log('user connected')
     console.log(socket.id)
-    //newConnectionHandler
+    // TODO: newConnectionHandler
+    // TODO: disconnectHadler
+    socket.on("disconnect",()=>{})
+    // TODO: newMessageHandler
+    socket.on("new-message",(data)=>{})
+    // TODO: chatHistoryHandler
+    socket.on("direct-chat-history",(data)=>{})
+    // TODO: startTypingHandler
+    socket.on("start-typing",(data)=>{})
+    // TODO: stopTypingHandler
+    socket.on("stop-typing",(data)=>{})
+
   })
-  setInterval(() => {
-    //emit online user
-  }, [1000 * 8])
 }
 module.exports={registerSocketServer}

@@ -64,7 +64,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   const { currentPassword, newPassword } = req.body
   const { _id } = req.user
   const user = await User.findById(_id).select('+password')
-  if (!user.correctPassword(currentPassword, user.password)) {
+  if (!(await user.correctPassword(currentPassword, user.password))) {
     return res.status(400).json({
       status: 'error',
       message: 'Current password is incorrect'
@@ -73,7 +73,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   user.password = newPassword
   user.passwordChangedAt = Date.now()
   await user.save({})
-  res.status(200).json({
+  return res.status(200).json({
     status: 'success',
     message: 'Password updated successfully'
   })
@@ -82,7 +82,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 exports.getUsers = catchAsync(async (req, res, next) => {
   const { _id } = req.user
   const other_verified_users = await User.find({
-    _id: { $ne: id },
+    _id: { $ne: _id },
     verified: true
   }).select('name avatar _id status')
   res.status(200).json({
@@ -133,7 +133,7 @@ exports.getConversations = catchAsync(async (req, res, next) => {
   const { _id } = req.user
   // Find all conversations where current user is a participant
   const conversations = await Conversation.find({
-    _id: { $in: id }
+    _id: { $in: _id }
   })
     .populate('messages')
     .populate('participants')

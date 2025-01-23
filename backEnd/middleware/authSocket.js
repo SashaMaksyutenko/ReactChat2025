@@ -1,4 +1,6 @@
 const jwt = require('jsonwebtoken')
+const dotenv = require('dotenv')
+dotenv.config({ path: '../config.env' })
 const config = process.env
 const verifyTokenSocket = (socket, next) => {
   const token = socket.handshake.auth?.token
@@ -11,4 +13,4 @@ const verifyTokenSocket = (socket, next) => {
   }
   next()
 }
-module.exports=verifyTokenSocket
+module.exports = verifyTokenSocket
