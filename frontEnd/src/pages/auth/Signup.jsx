@@ -1,10 +1,16 @@
+/* eslint-disable no-unused-vars */
 import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../../components/Logo'
 import SignupIllustration from '../../images/auth/signup.svg'
 import { EnvelopeSimple, Lock, User } from '@phosphor-icons/react'
-
+import { useDispatch } from 'react-redux'
+import { RegisterUser } from '../../redux/slices/auth'
 export default function Signup () {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
+  // const submitForm=()=>{
+  //   dispatch(RegisterUser(formData))
+  // }
   return (
     <div className='border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark h-screen'>
       <div className='flex flex-wrap items-center h-full'>
