@@ -18,7 +18,7 @@ const schema = yup.object().shape({
 })
 export default function Login () {
   const navigate = useNavigate()
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
   const { isLoading } = useSelector(state => state.auth)
   const {
     register,
@@ -33,7 +33,7 @@ export default function Login () {
   })
   const onSubmit = data => {
     console.log(data, 'Form Data:Login')
-    dispatch(LoginUser(data,navigate))
+    dispatch(LoginUser(data, navigate))
   }
   return (
     <div className='border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark h-screen'>
