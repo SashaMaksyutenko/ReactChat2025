@@ -31,9 +31,9 @@ const slice = createSlice({
   }
 })
 export default slice.reducer
-const { setError, setLoading } = slice.actions
+const { setError, setLoading, loginSuccess, logoutSuccess } = slice.actions
 // register user
-export function RegisterUser (formData) {
+export function RegisterUser (formData, navigate) {
   return async (dispatch, getState) => {
     dispatch(setError(null))
     dispatch(setLoading(true))
@@ -58,11 +58,14 @@ export function RegisterUser (formData) {
       })
       .finally(() => {
         dispatch(setLoading(false))
+        if (!getState().auth.error) {
+          navigate(`/auth/verify?email=${formData.email}`)
+        }
       })
   }
 }
 // resend OTP
-export function resendOTP (email) {
+export function ResendOTP (email) {
   return async (dispatch, getState) => {
     dispatch(setError(null))
     dispatch(setLoading(true))
@@ -163,5 +166,16 @@ export function LoginUser (formValues, navigate) {
           navigate('/dashboard')
         }
       })
+  }
+}
+export function LogoutUser (navigate) {
+  return async (dispatch, getState) => {
+    try {
+      dispatch(logoutSuccess())
+      navigate('/')
+      toast.success('Logged out Successfully')
+    } catch (error) {
+      console.log(error)
+    }
   }
 }

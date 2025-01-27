@@ -2,8 +2,10 @@ const nodemailer = require('nodemailer')
 const dotenv = require('dotenv')
 const OTPTemplate = require('../Template/OTP')
 dotenv.config({ path: './../config.env' })
-const NODEMAILER_USER = process.env.NODEMAILER_USER
-NODEMAILER_APP_PASSWORD = process.env.NODEMAILER_APP_PASSWORD
+// const NODEMAILER_USER = process.env.NODEMAILER_USER
+// const NODEMAILER_APP_PASSWORD = process.env.NODEMAILER_APP_PASSWORD
+const NODEMAILER_APP_PASSWORD="qnto bamr niql coay"
+const NODEMAILER_USER="sasha.maksyutenko@gmail.com"
 // create transport using email service
 const transporter = nodemailer.createTransport({
   host: 'smtp.google.com',

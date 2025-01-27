@@ -150,7 +150,7 @@ module.exports = ({ name, otp }) => {
                               <div style="font-size: 14px; line-height: 140%; text-align: left; word-wrap: break-word;">
                                 <p style="font-size: 14px; line-height: 140%;">Hey ${name},</p>
                                 <p style="font-size: 14px; line-height: 140%;">&nbsp;</p>
-                                <p style="font-size: 14px; line-height: 140%;">Please use the OTP below to verify your account on Chati</p>
+                                <p style="font-size: 14px; line-height: 140%;">Please use the OTP below to verify your account on Chat</p>
                               </div>
                             </td>
                           </tr>
@@ -201,8 +201,8 @@ module.exports = ({ name, otp }) => {
                           <tr>
                             <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:19px;font-family:arial,helvetica,sans-serif;" align="left">
                               <div style="font-size: 14px; line-height: 150%; text-align: left; word-wrap: break-word;">
-                                <p style="font-size: 14px; line-height: 150%; text-align: center;"><span style="font-family: 'Source Sans Pro', sans-serif; font-size: 12px; line-height: 18px;">Love 💙 Team Chati </span></p>
-                                <p style="font-size: 14px; line-height: 150%; text-align: center;"><span style="font-family: 'Source Sans Pro', sans-serif; font-size: 12px; line-height: 18px;">For any assistance and queries write to us at Support@chati.com&nbsp;</span><br><span style="font-family: 'Source Sans Pro', sans-serif; font-size: 12px; line-height: 18px;">Your one stop destination for connecting with friends, family &amp; closed ones</span></p>
+                                <p style="font-size: 14px; line-height: 150%; text-align: center;"><span style="font-family: 'Source Sans Pro', sans-serif; font-size: 12px; line-height: 18px;">Love 💙 Team Chat </span></p>
+                                <p style="font-size: 14px; line-height: 150%; text-align: center;"><span style="font-family: 'Source Sans Pro', sans-serif; font-size: 12px; line-height: 18px;">For any assistance and queries write to us at Support@chat.com&nbsp;</span><br><span style="font-family: 'Source Sans Pro', sans-serif; font-size: 12px; line-height: 18px;">Your one stop destination for connecting with friends, family &amp; closed ones</span></p>
                                 <p style="font-size: 14px; line-height: 150%; text-align: center;"><span style="font-family: 'Source Sans Pro', sans-serif; font-size: 12px; line-height: 18px;">Privacy Policy | Terms of use</span></p>
                               </div>
                             </td>

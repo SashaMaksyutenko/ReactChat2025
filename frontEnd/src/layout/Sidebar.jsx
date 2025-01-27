@@ -7,6 +7,8 @@ import {
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import DarkModeSwitcher from '../components/DarkModeSwitcher'
+import { useDispatch } from 'react-redux'
+import { LogoutUser } from '../redux/slices/auth'
 const NAVIGATION = [
   {
     key: 0,
@@ -22,6 +24,7 @@ const NAVIGATION = [
   }
 ]
 export default function Sidebar () {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [selected, setSelected] = useState(0)
   const handleClick = key => {
@@ -64,7 +67,7 @@ export default function Sidebar () {
         </div>
         <button
           onClick={() => {
-            navigate('/')
+            dispatch(LogoutUser(navigate))
           }}
           className='w-full flex flex-row items-center justify-center border rounded-md border-stroke p-2 dark:border-strokedark hover:bg-stone-100 hover:cursor-pointer'
         >

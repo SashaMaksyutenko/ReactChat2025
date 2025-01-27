@@ -40,7 +40,7 @@ export default function Signup () {
   })
   const onSubmit = data => {
     console.log(data, 'Form Data:Signup')
-    dispatch(RegisterUser(data))
+    dispatch(RegisterUser(data,navigate))
   }
   return (
     <div className='border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark h-screen'>
