@@ -6,7 +6,7 @@ import { EnvelopeSimple, Lock } from '@phosphor-icons/react'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { LoginUser } from '../../redux/slices/auth'
 // validation Schema
 const schema = yup.object().shape({
@@ -14,30 +14,27 @@ const schema = yup.object().shape({
     .string()
     .email('please enter a valid email')
     .required('Email is required'),
-  password: yup.string().min(6, 'Password must be at least 6 characters')
+  password: yup
+    .string()
+    .min(6, 'Password must be at least 6 characters')
+    .required('Password is required')
 })
 export default function Login () {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { isLoading } = useSelector(state => state.auth)
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting }
+    formState: { errors }
   } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: {
-      email: '',
-      password: ''
-    }
+    resolver: yupResolver(schema)
   })
   const onSubmit = data => {
-    console.log(data, 'Form Data:Login')
     dispatch(LoginUser(data, navigate))
   }
   return (
-    <div className='border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark h-screen'>
-      <div className='flex flex-wrap items-center h-full'>
+    <div className='border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark min-h-screen'>
+      <div className='flex flex-wrap items-center h-full min-h-screen'>
         <div className='hidden w-full xl:block xl:w-1/2'>
           <div className='py=17.5 px-26 text-center'>
             <Link to='/' className='mb-5.5 inline-block'>
@@ -65,13 +62,14 @@ export default function Login () {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className='mb-4'>
                 <label
-                  htmlFor=''
+                  htmlFor='email'
                   className='mb-2.5 block font-medium text-black dark:text-white'
                 >
                   Email
                 </label>
                 <div className='relative'>
                   <input
+                    id='email'
                     type='email'
                     {...register('email')}
                     placeholder='Enter your email'
@@ -92,13 +90,14 @@ export default function Login () {
               </div>
               <div className='mb-6'>
                 <label
-                  htmlFor=''
+                  htmlFor='password'
                   className='mb-2.5 block font-medium text-black dark:text-white'
                 >
                   Password
                 </label>
                 <div className='relative'>
                   <input
+                    id='password'
                     type='password'
                     {...register('password')}
                     placeholder='6+ characters, 1 Capital letter'
@@ -118,13 +117,11 @@ export default function Login () {
                 )}
               </div>
               <div className='mb-5'>
-                <button
+                <input
                   type='submit'
-                  disabled={isSubmitting || isLoading}
-                  className='w-full cursor-pointer border border-primary bg-primary p-4 rounded-lg text-white transition hover:bg-opacity-90 '
-                >
-                  {isSubmitting || isLoading ? 'Submitting' : 'Sign In'}
-                </button>
+                  value='Sign In'
+                  className='w-full cursor-pointer border border-primary bg-primary p-4 rounded-lg text-white transition hover:bg-opacity-90'
+                />
               </div>
               <div className='mt-6 text-center'>
                 <p>
