@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../../components/Logo'
 import SignupIllustration from '../../images/auth/signup.svg'
 import { EnvelopeSimple, Lock, User } from '@phosphor-icons/react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { RegisterUser } from '../../redux/slices/auth'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
@@ -15,7 +15,10 @@ const schema = yup.object().shape({
     .string()
     .email('please enter a valid email')
     .required('Email is required'),
-  password: yup.string().min(6, 'Password must be at least 6 characters'),
+  password: yup
+    .string()
+    .min(6, 'Password must be at least 6 characters')
+    .required('Password is required'),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('password')], 'Password must match')
@@ -24,27 +27,20 @@ const schema = yup.object().shape({
 export default function Signup () {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { isLoading } = useSelector(state => state.auth)
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting }
+    formState: { errors }
   } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    }
+    resolver: yupResolver(schema)
   })
   const onSubmit = data => {
-    console.log(data, 'Form Data:Signup')
-    dispatch(RegisterUser(data,navigate))
+    console.log(data)
+    dispatch(RegisterUser(data, navigate))
   }
   return (
     <div className='border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark h-screen'>
-      <div className='flex flex-wrap items-center h-full'>
+      <div className='flex flex-wrap items-center h-full  min-h-screen'>
         <div className='hidden w-full xl:block xl:w-1/2'>
           <div className='py=17.5 px-26 text-center'>
             <Link to='/' className='mb-5.5 inline-block'>
@@ -79,26 +75,22 @@ export default function Signup () {
                 <div className='relative'>
                   <input
                     type='text'
+                    id='name'
                     {...register('name')}
                     placeholder='Enter your fullname'
-                    className={`w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary
-                focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary ${
-                  errors.name
-                    ? 'border-red focus:border-red'
-                    : 'border-stroke'
-                }`}
+                    className='w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary'
                   />
                   <span className='absolute right-4 top-4'>
                     <User size={24} />
                   </span>
                 </div>
                 {errors.name && (
-                  <p className='text-red text-sm'>{errors.name.message}</p>
+                  <p className='text-red'>{errors.name.message}</p>
                 )}
               </div>
               <div className='mb-4'>
                 <label
-                  htmlFor=''
+                  htmlFor='email'
                   className='mb-2.5 block font-medium text-black dark:text-white'
                 >
                   Email
@@ -106,6 +98,7 @@ export default function Signup () {
                 <div className='relative'>
                   <input
                     type='email'
+                    id='email'
                     {...register('email')}
                     placeholder='Enter your email'
                     className='w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary
@@ -116,12 +109,12 @@ export default function Signup () {
                   </span>
                 </div>
                 {errors.email && (
-                  <p className='text-red text-sm'>{errors.email.message}</p>
+                  <p className='text-red'>{errors.email.message}</p>
                 )}
               </div>
               <div className='mb-4'>
                 <label
-                  htmlFor=''
+                  htmlFor='password'
                   className='mb-2.5 block font-medium text-black dark:text-white'
                 >
                   Password
@@ -129,6 +122,7 @@ export default function Signup () {
                 <div className='relative'>
                   <input
                     type='password'
+                    id='password'
                     {...register('password')}
                     placeholder='Enter your password'
                     className='w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary
@@ -139,12 +133,12 @@ export default function Signup () {
                   </span>
                 </div>
                 {errors.password && (
-                  <p className='text-red text-sm'>{errors.password.message}</p>
+                  <p className='text-red'>{errors.password.message}</p>
                 )}
               </div>
               <div className='mb-6'>
                 <label
-                  htmlFor=''
+                  htmlFor='confirmPassword'
                   className='mb-2.5 block font-medium text-black dark:text-white'
                 >
                   Re-Type Password
@@ -152,6 +146,7 @@ export default function Signup () {
                 <div className='relative'>
                   <input
                     type='password'
+                    id='confirmPassword'
                     {...register('confirmPassword')}
                     placeholder='Retype your password'
                     className='w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary
@@ -162,19 +157,15 @@ export default function Signup () {
                   </span>
                 </div>
                 {errors.confirmPassword && (
-                  <p className='text-red text-sm'>
-                    {errors.confirmPassword.message}
-                  </p>
+                  <p className='text-red'>{errors.confirmPassword.message}</p>
                 )}
               </div>
               <div className='mb-5'>
-                <button
+                <input
                   type='submit'
-                  disabled={isSubmitting || isLoading}
-                  className='w-full cursor-pointer border border-primary bg-primary p-4 rounded-lg text-white transition hover:bg-opacity-90 '
-                >
-                  {isSubmitting || isLoading ? 'Submitting' : 'Create Account'}
-                </button>
+                  value='Create account'
+                  className='w-full cursor-pointer border border-primary bg-primary p-4 rounded-lg text-white transition hover:bg-opacity-90'
+                />
               </div>
               <div className='mt-6 text-center'>
                 <p>
