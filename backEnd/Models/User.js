@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema(
       trim: true
     },
     jobTitle: {
-      type: String
+      type: String,
+      trim: true
     },
     bio: {
       type: String,
@@ -63,19 +64,15 @@ const userSchema = new mongoose.Schema(
 )
 // PRE SAVE HOOK
 userSchema.pre('save', async function (next) {
+  if (this.isModified('password') && this.password) {
+    this.password = await bcrypt.hash(this.password.toString(), 12)
+    console.log(this.password.toString(), 'from PRE SAVE HOOK ( password )')
+  }
   // running this function if only otp modified
   if (this.isModified('otp') && this.otp) {
-    if (this.otp) {
-      // Hash otp with cost of 12
-      this.otp = await bcrypt.hash(this.otp.toString(), 12)
-      console.log(this.otp.toString(), 'from PRE SAVE HOOK')
-    }
-  }
-  if (this.isModified('password') && this.password) {
-    if (this.password) {
-      this.password = await bcrypt.hash(this.password.toString(), 12)
-      console.log(this.password.toString(), 'from PRE SAVE HOOK')
-    }
+    // Hash otp with cost of 12
+    this.otp = await bcrypt.hash(this.otp.toString(), 12)
+    console.log(this.otp.toString(), 'from PRE SAVE HOOK ( otp )')
   }
   next()
 })
@@ -93,7 +90,10 @@ userSchema.methods.correctPassword = async function (
 // Changing password after token was issued
 userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
-    const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000)
+    const changedTimestamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10
+    )
     return JWTTimestamp < changedTimestamp
   }
   return false
