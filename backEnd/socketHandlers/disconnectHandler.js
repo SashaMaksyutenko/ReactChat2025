@@ -1,6 +1,5 @@
 const User = require('../Models/User')
 const disconnectHandler = async socket => {
-  const { userId } = socket.user
   // Log the disconnection
   console.log(`User disconnected: ${socket.id}`)
   // Update user doccument: set socketId to undefined and status to Offline
@@ -9,6 +8,7 @@ const disconnectHandler = async socket => {
       socketId: socket.id
     },
     {
+      socketId: undefined,
       status: 'Offline'
     },
     {
@@ -24,7 +24,7 @@ const disconnectHandler = async socket => {
       status: 'Offline'
     })
   } else {
-    console.log(`User with Id ${socket.id} not found`)
+    console.log(`User with socket Id ${socket.id} not found`)
   }
 }
 module.exports = disconnectHandler

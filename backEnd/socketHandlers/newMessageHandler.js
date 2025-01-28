@@ -8,7 +8,7 @@ const newMessageHandler = async (socket, data, io) => {
     // 1. Find conversation by conversationId
     const conversation = await Conversation.findById(conversationId)
     if (!conversation) {
-      socket.emit('error', { message: 'Conversation not found' })
+      return socket.emit('error', { message: 'Conversation not found' })
     }
     // 2. Create a new message using Message Model
     const newMessage = await Message.create({
@@ -22,6 +22,7 @@ const newMessageHandler = async (socket, data, io) => {
     })
     // 3. Push the messageId to messages array in conversation
     conversation.messages.push(newMessage._id)
+    await conversation.save();
     // 4. Populate the conversation with messages and participants
     const updatedConversation = await Conversation.findById(conversationId)
       .populate('messages')
