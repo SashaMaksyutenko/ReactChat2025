@@ -1,12 +1,6 @@
 import { CaretDown, Globe } from '@phosphor-icons/react'
-import { useState } from 'react'
-
-export default function SelectInput () {
-  const [selectedOption, setSelectedOption] = useState('')
-  const [isOptionSelected, setIsOptionSelected] = useState(false)
-  const changeTextColor = () => {
-    setIsOptionSelected(true)
-  }
+import PropTypes from 'prop-types';
+export default function SelectInput ({ register }) {
   return (
     <div>
       <label className='mb-3 block text-black dark:text-white'>
@@ -17,14 +11,8 @@ export default function SelectInput () {
           <Globe size={20} />
         </span>
         <select
-          value={selectedOption}
-          onChange={e => {
-            setSelectedOption(e.target.value)
-            changeTextColor()
-          }}
-          className={`relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-12 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input ${
-            isOptionSelected ? 'text-black dark:text-white' : ''
-          }`}
+          {...register("country")}
+          className={`relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-12 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input`}
         >
           <option value='' disabled className='text-body dark:text-bodydark'>
             Select Country
@@ -48,4 +36,7 @@ export default function SelectInput () {
       </div>
     </div>
   )
+}
+SelectInput.propTypes = {
+  register: PropTypes.func.isRequired,
 }
