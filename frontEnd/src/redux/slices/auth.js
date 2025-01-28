@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { createSlice } from '@reduxjs/toolkit'
 import axios from '../../utils/axios'
@@ -20,34 +19,42 @@ const slice = createSlice({
     setLoading (state, action) {
       state.isLoading = action.payload
     },
+    fetchUserSuccess (state, action) {
+      state.user = action.payload
+    },
     loginSuccess (state, action) {
       state.token = action.payload
       state.isLoggedIn = true
     },
     logoutSuccess (state, action) {
       state.token = null
-      state.isLoggedIn = true
+      state.isLoggedIn = false
     }
   }
 })
 export default slice.reducer
 const { setError, setLoading, loginSuccess, logoutSuccess } = slice.actions
 // register user
-export function RegisterUser (formData, navigate) {
+export function RegisterUser (formValues, navigate) {
   return async (dispatch, getState) => {
     dispatch(setError(null))
     dispatch(setLoading(true))
-    const reqBody = { ...formData }
     // Make API CALL
     await axios
-      .post('/auth/signup', reqBody, {
-        headers: {
-          'Content-Type': 'application/json'
+      .post(
+        '/auth/signup',
+        {
+          ...formValues
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
-      })
+      )
       .then(function (response) {
         console.log(response)
-        toast.success(response.data.message)
+        toast.success('OTP sent successfully!')
       })
       .catch(function (error) {
         console.log(error)
@@ -58,8 +65,9 @@ export function RegisterUser (formData, navigate) {
       })
       .finally(() => {
         dispatch(setLoading(false))
+        //  do navigation logic over here
         if (!getState().auth.error) {
-          navigate(`/auth/verify?email=${formData.email}`)
+          navigate(`/auth/verify?email=${formValues.email}`)
         }
       })
   }
@@ -84,7 +92,7 @@ export function ResendOTP (email) {
       )
       .then(function (response) {
         console.log(response)
-        toast.success(response.data.message)
+        toast.success('OTP resended successfully!')
       })
       .catch(function (error) {
         console.log(error)
@@ -126,6 +134,7 @@ export function VerifyOTP (formValues, navigate) {
       })
       .finally(() => {
         dispatch(setLoading(false))
+        //  do navigation logic over here
         if (!getState().auth.error) {
           navigate('/dashboard')
         }
@@ -162,6 +171,7 @@ export function LoginUser (formValues, navigate) {
       })
       .finally(() => {
         dispatch(setLoading(false))
+        //  do navigation logic over here
         if (!getState().auth.error) {
           navigate('/dashboard')
         }
