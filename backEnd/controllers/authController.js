@@ -185,7 +185,6 @@ exports.protect = catchAsync(async (req, res, next) => {
     const this_user = await User.findById(decoded.userId)
     if (!this_user) {
       return res.status(401).json({
-        status: 'error',
         message: 'Token does no longer belongs to this user'
       })
     }
@@ -205,8 +204,6 @@ exports.protect = catchAsync(async (req, res, next) => {
     res.status(400).json({
       status: 'error',
       message: 'Authentication failed',
-      token,
-      user_id: user._id
     })
   }
 })

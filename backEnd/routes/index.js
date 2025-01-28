@@ -1,6 +1,6 @@
 const router=require('express').Router()
-const authRoutes=require('./auth')
-const userRoutes=require('./user')
-router.use('/auth', authRoutes)
-router.use('/user', userRoutes)
+const authRoute=require('./auth')
+const userRoute=require('./user')
+router.use('/auth', authRoute)
+router.use('/user', userRoute)
 module.exports=router

@@ -8,7 +8,7 @@ exports.getMe = catchAsync(async (req, res, next) => {
     status: 'success',
     message: 'User info was found successfully',
     data: {
-      user: user
+      user: req.user
     }
   })
 })
@@ -80,19 +80,19 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 })
 // get users
 exports.getUsers = catchAsync(async (req, res, next) => {
-  const { _id } = req.user
-  const other_verified_users = await User.find({
-    _id: { $ne: _id },
-    verified: true
-  }).select('name avatar _id status')
+  const { _id } = req.user;
+  const other_users = await User.find({ _id: { $ne: _id } }).select(
+    "name _id avatar"
+  );
+
   res.status(200).json({
-    status: 'success',
-    message: 'User found successfully',
+    status: "success",
+    message: "Users found successfully!",
     data: {
-      users: other_verified_users
-    }
-  })
-})
+      users: other_users,
+    },
+  });
+});
 // start conversation
 exports.startConversation = catchAsync(async (req, res, next) => {
   const { userId } = req.body
@@ -121,7 +121,6 @@ exports.startConversation = catchAsync(async (req, res, next) => {
       .populate('participants')
     return res.status(201).json({
       status: 'success',
-      message: 'User info was found successfully',
       data: {
         conversation: newConversation
       }
@@ -133,7 +132,7 @@ exports.getConversations = catchAsync(async (req, res, next) => {
   const { _id } = req.user
   // Find all conversations where current user is a participant
   const conversations = await Conversation.find({
-    _id: { $in: _id }
+    participants: { $in: [_id] },
   })
     .populate('messages')
     .populate('participants')
