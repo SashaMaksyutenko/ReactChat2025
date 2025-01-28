@@ -7,7 +7,7 @@ export default function ProfilePage () {
   const activeClasses = 'text-primary border-primary'
   const inactiveClasses = 'border-transparent'
   return (
-    <div className='w-full rounded-sm border border-stroke bg-white py-7.5 px-20 shadow-default dark:border-strokedark dark:bg-boxdark'>
+    <div className='w-full min-h-screen overflow-y-auto no-scrollbar rounded-sm border border-stroke bg-white py-7.5 px-5 shadow-default dark:border-strokedark dark:bg-boxdark'>
       {/* buttons for tabs */}
       <div className='mb-6 flex flex-wrap gap-5 border-b border-stroke dark:border-strokedark sm:gap-10'>
         <Link
