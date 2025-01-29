@@ -5,7 +5,7 @@ import App from './App.jsx'
 import 'dropzone/dist/dropzone.css'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider as ReduxProvider } from 'react-redux'
-import {store} from '/src/redux/store'
+import store from '/src/redux/store'
 import {ToastContainer} from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
 const rootElement = document.getElementById('root')
