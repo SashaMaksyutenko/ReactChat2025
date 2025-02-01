@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect } from 'react'
 import { Smiley } from '@phosphor-icons/react'
+import { useEffect, useRef, useState } from 'react'
+import PropTypes from 'prop-types'
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
-export default function EmojiPicker () {
+export default function EmojiPicker ({ onSelectEmoji }) {
   const colorMode = JSON.parse(window.localStorage.getItem('color-theme'))
   const [pickerOpen, setPickerOpen] = useState(false)
   const pickerRef = useRef(null)
@@ -12,14 +13,19 @@ export default function EmojiPicker () {
       if (
         pickerRef.current &&
         !pickerRef.current.contains(event.target) &&
-        buttonRef &&
+        buttonRef.current &&
         !buttonRef.current.contains(event.target)
       ) {
         setPickerOpen(false)
       }
     }
+    EmojiPicker.propTypes = {
+      onSelectEmoji: PropTypes.func.isRequired
+    }
     document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
   }, [])
   const handleTrigger = e => {
     e.preventDefault()
@@ -27,16 +33,16 @@ export default function EmojiPicker () {
   }
   return (
     <div className='relative flex'>
-      <div
+      <button
         ref={buttonRef}
         className='text-[#98A6AD] hover:text-body'
         onClick={handleTrigger}
       >
         <Smiley size={20} className='text-body' />
-      </div>
+      </button>
       {pickerOpen && (
-        <div ref={pickerRef} className='absolute z-40 -top-115 right-0'>
-          <Picker theme={colorMode} data={data} onEmojiSelect={console.log} />
+        <div ref={pickerRef} className='absolute z-40 -top-115 -right-10'>
+          <Picker theme={colorMode} data={data} onEmojiSelect={onSelectEmoji} />
         </div>
       )}
     </div>

@@ -8,6 +8,7 @@ import {
 import { useState } from 'react'
 import User01 from '../images/user/user-01.png'
 import User02 from '../images/user/user-02.png'
+import PropTypes from 'prop-types'
 export default function VideoRoom ({ open, handleClose }) {
   const [muteAudio, setMuteAudio] = useState(false)
   const [muteVideo, setMuteVideo] = useState(false)
@@ -94,4 +95,8 @@ export default function VideoRoom ({ open, handleClose }) {
       </div>
     </div>
   )
+}
+VideoRoom.propTypes = {
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired
 }
