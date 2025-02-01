@@ -2,7 +2,7 @@ import { PaperPlaneTilt, X } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToggleMediaModal } from "../redux/slices/app";
-import FlieDropZone from "./FlieDropZone";
+import FileDropZone from "./FileDropZone";
 import { uploadToSupabase } from "../utils/supabase";
 import { sendDirectMessage } from "../socket/socketConnection";
 export default function MediaPicker() {
@@ -28,7 +28,6 @@ export default function MediaPicker() {
       dispatch(ToggleMediaModal(false));
     };
     document.addEventListener("keydown", keyHandler);
-
     return () => document.removeEventListener("keydown", keyHandler);
   });
   // Function to upload files to Supabase
@@ -103,7 +102,7 @@ export default function MediaPicker() {
         </div>
         <div className="max-h-125 overflow-y-scroll no-scrollbar">
           {/* FileDropzone */}
-          <FlieDropZone multiple onFilesSelected={handleFilesSelected} />
+          <FileDropZone multiple onFilesSelected={handleFilesSelected} />
         </div>
         <div className="flex flex-row items-center space-x-2 justify-between mt-4">
           <input
