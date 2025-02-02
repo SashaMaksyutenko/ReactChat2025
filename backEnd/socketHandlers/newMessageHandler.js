@@ -8,7 +8,7 @@ const newMessageHandler = async (socket, data, io) => {
     // 1. Find conversation by conversationId
     const conversation = await Conversation.findById(conversationId)
     if (!conversation) {
-      return socket.emit('error', { message: 'Conversation not found' })
+      return socket.emit('error', { message: 'Conversation not found from newMessageHandler' })
     }
     // 2. Create a new message using Message Model
     const newMessage = await Message.create({

@@ -97,6 +97,6 @@ export default function VideoRoom ({ open, handleClose }) {
   )
 }
 VideoRoom.propTypes = {
-  open: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired
+  open: PropTypes.bool,
+  handleClose: PropTypes.func
 }

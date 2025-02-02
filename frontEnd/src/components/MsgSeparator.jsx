@@ -11,5 +11,5 @@ export default function MsgSeparator ({ date }) {
   )
 }
 MsgSeparator.propTypes = {
-  date: PropTypes.string.isRequired,
+  date: PropTypes.string,
 }

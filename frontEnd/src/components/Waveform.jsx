@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import PropTypes from 'prop-types'
 import WaveSurfer from 'wavesurfer.js'
 import AudioFile from '../assets/audio/file_example.mp3'
 import { Pause, Play } from '@phosphor-icons/react'
@@ -104,4 +105,7 @@ export default function Waveform (props) {
       </div>
     </div>
   )
+}
+Waveform.propTypes = {
+  incoming: PropTypes.bool
 }

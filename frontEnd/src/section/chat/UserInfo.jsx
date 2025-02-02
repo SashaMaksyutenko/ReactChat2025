@@ -44,7 +44,7 @@ export default function Inbox () {
   const this_conversation = conversations.find(
     el => el._id?.toString() === currentConversation?.toString()
   )
-  console.log(this_conversation?.messages, 'this conversation messages')
+  console.log(this_conversation?.messages, 'this conversation messages userInfo')
   let other_user
 
   if (this_conversation) {

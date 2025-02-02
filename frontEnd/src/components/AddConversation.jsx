@@ -1,18 +1,16 @@
-import React, { useEffect } from "react";
+/* eslint-disable no-unused-vars */
+import { useEffect } from "react";
+import PropTypes from "prop-types";
 import { PaperPlaneTilt, X } from "@phosphor-icons/react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetUsers, StartConversation } from "../redux/slices/chat";
-
 export default function AddConversation({ open, handleClose }) {
   const dispatch = useDispatch();
-
   const { users } = useSelector((state) => state.chat);
-
   useEffect(() => {
     // dispatch GetUsers
     dispatch(GetUsers());
   }, []);
-
   const handleStartConversation = (id) => {
     dispatch(
       StartConversation({
@@ -21,7 +19,6 @@ export default function AddConversation({ open, handleClose }) {
     );
     handleClose();
   };
-
   return (
     <div
       className={`fixed left-0 top-0 z-999999 flex h-full min-h-screen w-full items-center justify-center bg-black/90 px-4 py-5 ${
@@ -81,3 +78,8 @@ export default function AddConversation({ open, handleClose }) {
     </div>
   );
 }
+AddConversation.propTypes = {
+  open: PropTypes.bool,
+  handleClose: PropTypes.func,
+};
+

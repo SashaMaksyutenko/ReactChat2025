@@ -256,6 +256,6 @@ export default function ChatList({ open, handleClose }) {
   );
 }
 ChatList.propTypes = {
-  open: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
+  open: PropTypes.bool,
+  handleClose: PropTypes.func,
 };

@@ -104,9 +104,9 @@ MediaMsgGrid.propTypes = {
 MediaItem.propTypes = {
   media: PropTypes.shape({
     _id: PropTypes.string,
-    url: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    url: PropTypes.string,
+    type: PropTypes.string,
   }).isRequired,
-  index: PropTypes.number.isRequired,
-  openLightbox: PropTypes.func.isRequired,
+  index: PropTypes.number,
+  openLightbox: PropTypes.func,
 };

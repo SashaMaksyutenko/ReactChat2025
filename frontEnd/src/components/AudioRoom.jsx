@@ -81,7 +81,7 @@ export default function AudioRoom({ open, handleClose }) {
   );
 }
 AudioRoom.propTypes = {
-  open: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
+  open: PropTypes.bool,
+  handleClose: PropTypes.func,
 };
 
