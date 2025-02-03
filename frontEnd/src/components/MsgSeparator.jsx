@@ -1,15 +1,16 @@
 /* eslint-disable no-unused-vars */
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 export default function MsgSeparator ({ date }) {
   return (
     <div className='flex flex-row items-center space-x-5 w-full py-2'>
       <div className='border-b border-stroke dark:border-strokedark grow '></div>
       <div className='p-2 bg-gray dark:bg-boxdark-2 rounded-md text-xs text-body font-medium'>
-      {new Date(date).toDateString()}
+        {new Date(date).toDateString()}
       </div>
-      </div>
+      <div className='border-b border-stroke dark:border-strokedark grow'></div>
+    </div>
   )
 }
 MsgSeparator.propTypes = {
-  date: PropTypes.string,
+  date: PropTypes.string
 }

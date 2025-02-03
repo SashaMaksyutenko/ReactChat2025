@@ -41,5 +41,3 @@ export const ToggleMediaModal = value => async (dispatch, getState) => {
 export const ToggleDocumentModal = value => async (dispatch, getState) => {
   dispatch(slice.actions.updateDocumentModal(value))
 }
-
-

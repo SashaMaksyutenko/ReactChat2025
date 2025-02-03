@@ -67,12 +67,12 @@ export default function Document({
   );
 }
 Document.propTypes = {
-  incoming: PropTypes.bool.isRequired,
-  author: PropTypes.string.isRequired,
-  timestamp: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  incoming: PropTypes.bool,
+  author: PropTypes.string,
+  timestamp: PropTypes.string,
+  content: PropTypes.string,
   documentFile: PropTypes.shape({
-    url: PropTypes.string.isRequired,
+    url: PropTypes.string,
     name: PropTypes.string,
     size: PropTypes.number
   }).isRequired,

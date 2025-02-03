@@ -3,7 +3,6 @@ import { BASE_URL } from "../utils/axios";
 let socket = null;
 export const connectWithSocketServer = (userDetails) => {
   const jwtToken = userDetails.token;
-
   socket = io(BASE_URL, {
     auth: {
       token: jwtToken,

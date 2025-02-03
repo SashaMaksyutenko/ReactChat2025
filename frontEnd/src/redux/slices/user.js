@@ -103,7 +103,6 @@ export function UpdatePassword(formValues, handleLogout) {
       )
       .then(function (response) {
         console.log(response);
-
         handleLogout();
         toast.success(response?.data?.message);
       })

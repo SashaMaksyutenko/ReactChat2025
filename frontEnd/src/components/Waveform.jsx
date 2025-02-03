@@ -1,10 +1,12 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import WaveSurfer from 'wavesurfer.js'
 import AudioFile from '../assets/audio/file_example.mp3'
 import { Pause, Play } from '@phosphor-icons/react'
 export default function Waveform (props) {
-  const { incoming } = props
+  const { incoming, audioUrl } = props
   const waveformRef = useRef(null)
   const [wavesurfer, setWavesurfer] = useState(null)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -79,9 +81,7 @@ export default function Waveform (props) {
   }
   return (
     <div
-      className={`flex flex-row items-center space-x-6 p-2 rounded-md ${
-        !incoming ? 'bg-transparent' : 'bg-gray-3 bg-boxdark'
-      }`}
+      className={`flex flex-row items-center space-x-6 p-2 rounded-md ${'bg-transparent'}`}
     >
       <button
         onClick={handePlayPause}

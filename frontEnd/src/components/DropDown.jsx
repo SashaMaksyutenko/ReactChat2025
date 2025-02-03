@@ -1,6 +1,8 @@
 import { DotsThree, PencilSimple, Trash } from '@phosphor-icons/react'
-import { useEffect, useRef, useState } from 'react'
-export default function DropDown () {
+import { useEffect } from 'react'
+import { useRef } from 'react'
+import { useState } from 'react'
+export default function Dropdown () {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const trigger = useRef(null)
   const dropdown = useRef(null)
@@ -11,8 +13,9 @@ export default function DropDown () {
         !dropdown ||
         dropdown.current.contains(target) ||
         trigger.current.contains(target)
-      )
+      ) {
         return
+      }
       setDropdownOpen(false)
     }
     document.addEventListener('click', clickHandler)
@@ -20,7 +23,7 @@ export default function DropDown () {
   })
   useEffect(() => {
     const keyHandler = ({ keyCode }) => {
-      if (!dropdownOpen || keyCode !== 27) return;
+      if (!dropdownOpen || keyCode !== 27) return
       setDropdownOpen(false)
     }
     document.addEventListener('keydown', keyHandler)
@@ -29,7 +32,7 @@ export default function DropDown () {
   return (
     <div className='relative flex'>
       <button
-        className='text-[98A6AD] hover:text-body'
+        className='text-[#98A6AD] hover:text-body'
         ref={trigger}
         onClick={() => setDropdownOpen(prev => !prev)}
       >
@@ -39,7 +42,7 @@ export default function DropDown () {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute right-0 top-full z-40 w-40 space-y-1 rounded-sm border border-stroke bg-white p-1.5 shadow-default dark:border-strokedark dark:bg-strokedark ${
+        className={`absolute right-0 top-full z-40 w-40 space-y-1 rounded-sm border border-stroke bg-white p-1.5 shadow-default dark:border-strokedark dark:bg-boxdark ${
           dropdownOpen === true ? 'block' : 'hidden'
         }`}
       >

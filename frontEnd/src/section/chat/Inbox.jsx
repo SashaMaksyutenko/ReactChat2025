@@ -1,5 +1,5 @@
-/* eslint-disable react/jsx-no-undef */
 /* eslint-disable no-unused-vars */
+/* eslint-disable react/jsx-no-undef */
 import React, { useEffect, useRef, useState } from 'react'
 import {
   ChatTeardropSlash,
@@ -45,7 +45,7 @@ export default function Inbox () {
   const this_conversation = conversations.find(
     el => el._id?.toString() === currentConversation?.toString()
   )
-  console.log(this_conversation?.messages, 'this conversation messages inbox')
+  console.log(this_conversation?.messages, 'this conversation messages')
   let other_user
   if (this_conversation) {
     other_user = this_conversation.participants.find(e => e._id !== user._id)
@@ -70,7 +70,7 @@ export default function Inbox () {
       }, 2000)
       return () => clearTimeout(timeout)
     }
-  }, [isTyping, other_user?._id, currentConversation])
+  }, [isTyping])
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       getDirectChatHistory({ conversationId: currentConversation })
@@ -133,7 +133,7 @@ export default function Inbox () {
               incoming,
               content,
               timestamp,
-              authorName,
+              author: authorName,
               type,
               date: msg?.date
             }
@@ -143,7 +143,7 @@ export default function Inbox () {
               incoming,
               content,
               timestamp,
-              authorName,
+              author: authorName,
               type,
               document: msg.document,
               date: msg?.date
@@ -154,7 +154,7 @@ export default function Inbox () {
               incoming,
               content,
               timestamp,
-              authorName,
+              author: authorName,
               type,
               media: msg.media,
               date: msg?.date
@@ -165,7 +165,7 @@ export default function Inbox () {
               incoming,
               content,
               timestamp,
-              authorName,
+              author: authorName,
               type,
               giphy: msg.giphyUrl,
               date: msg?.date
@@ -176,7 +176,7 @@ export default function Inbox () {
               incoming,
               content,
               timestamp,
-              authorName,
+              author: authorName,
               type,
               audioUrl: msg?.audioUrl,
               date: msg?.date

@@ -48,6 +48,7 @@ export default function FileDropZone({
           action={url}
           ref={formRef}
     id="upload"
+    className="dropzone rounded-md !border-dashed !border-bodydark1 bg-gray hover:!border-primary dark:!border-strokedark dark:bg-graydark dark:hover:!border-primary"
   >
           <div className="dz-message">
             <div className="mb-2.5 flex justify-center flex-col items-center space-y-2">

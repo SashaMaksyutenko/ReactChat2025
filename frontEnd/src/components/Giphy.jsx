@@ -72,7 +72,7 @@ export default function Giphy () {
         {gifs.length > 0 ? (
           <Grid
             width={gridRef.current?.offsetWidth}
-            columns={8}
+            columns={6}
             gutter={6}
             fetchGifs={fetchGifs}
             key={value}

@@ -19,9 +19,6 @@ export default function EmojiPicker ({ onSelectEmoji }) {
         setPickerOpen(false)
       }
     }
-    EmojiPicker.propTypes = {
-      onSelectEmoji: PropTypes.func.isRequired
-    }
     document.addEventListener('mousedown', handleClickOutside)
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)

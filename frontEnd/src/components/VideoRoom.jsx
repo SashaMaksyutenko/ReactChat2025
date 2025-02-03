@@ -27,6 +27,7 @@ export default function VideoRoom ({ open, handleClose }) {
       <div className='w-full max-w-142.5 rounded-lg bg-white dark:bg-boxdark md:py-8 px-8 py-12'>
         <div className='flex flex-col space-y-6'>
           {/* Video Feed Grid */}
+
           <div className='grid grid-cols-2 gap-4 h-50 mb-4'>
             {/* Video Feed 1 */}
             <div className='relative h-full w-full bg-gray dark:bg-boxdark-2 rounded-md flex items-center justify-center'>
@@ -37,11 +38,12 @@ export default function VideoRoom ({ open, handleClose }) {
                   className='h-20 w-20 rounded-full object-center object-cover'
                 />
                 <div className='font-medium text-sm text-center'>You</div>
-                <div className='absolute top-3 right-4'>
-                  {muteAudio && (
-                    <MicrophoneSlash size={20} className='text-primary' />
-                  )}
-                </div>
+              </div>
+
+              <div className='absolute top-3 right-4'>
+                {muteAudio && (
+                  <MicrophoneSlash size={20} className='text-primary' />
+                )}
               </div>
             </div>
             {/* Video Feed 2 */}
@@ -52,16 +54,17 @@ export default function VideoRoom ({ open, handleClose }) {
                   alt=''
                   className='h-20 w-20 rounded-full object-center object-cover'
                 />
-                <div className='font-medium text-sm text-center'>Victoria</div>
-                <div className='absolute top-3 right-4'>
-                  <MicrophoneSlash size={20} className='text-primary' />
-                </div>
+                <div className='font-medium text-sm text-center'>Shreyansh</div>
+              </div>
+
+              <div className='absolute top-3 right-4'>
+                <MicrophoneSlash size={20} className='text-primary' />
               </div>
             </div>
           </div>
           {/* Call controls */}
           <div className='flex flex-row items-center justify-center space-x-4'>
-            {/* Microphone button */}
+            {/* Microphone Button */}
             <button
               onClick={handleToggleAudio}
               className='p-3 rounded-md bg-gray dark:bg-boxdark text-black dark:text-white hover:bg-opacity-80 flex items-center justify-center'
@@ -72,14 +75,14 @@ export default function VideoRoom ({ open, handleClose }) {
                 <Microphone size={20} />
               )}
             </button>
-            {/* Disconnecting button */}
+            {/* Diconnecting */}
             <button
               onClick={handleClose}
               className='p-3 rounded-full bg-red text-white hover:bg-opacity-80'
             >
               <PhoneDisconnect size={20} />
             </button>
-            {/* VideoCamera button */}
+            {/* Video camera button */}
             <button
               onClick={handleToggleVideo}
               className='p-3 rounded-md bg-gray dark:bg-boxdark text-black dark:text-white hover:bg-opacity-80 flex items-center justify-center'

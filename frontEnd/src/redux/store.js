@@ -17,5 +17,4 @@ const persistor = persistStore(store)
 const { dispatch } = store
 const useSelector = useAppSelector
 const useDispatch = () => useAppDispatch()
-export default store;
-export { persistor, useSelector, useDispatch, dispatch };
+export { store, persistor, dispatch, useSelector, useDispatch }

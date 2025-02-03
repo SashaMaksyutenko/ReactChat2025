@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ProfileForm, UpdatePasswordForm } from '../section/Profile'
-
 export default function ProfilePage () {
   const [openTab, setOpenTab] = useState(1)
   const activeClasses = 'text-primary border-primary'

@@ -26,10 +26,10 @@ export default function Media({ incoming, author, timestamp, media, caption }) {
   );
 }
 Media.propTypes = {
-  incoming: PropTypes.bool.isRequired,
-  author: PropTypes.string.isRequired,
-  timestamp: PropTypes.string.isRequired,
-  media: PropTypes.array.isRequired,
+  incoming: PropTypes.bool,
+  author: PropTypes.string,
+  timestamp: PropTypes.string,
+  media: PropTypes.array,
   caption: PropTypes.string
 };
 

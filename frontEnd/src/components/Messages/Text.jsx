@@ -25,7 +25,6 @@ export default function Text({ incoming, author, timestamp, content }) {
           <Microlink style={{ width: "100%" }} url={links[0]} />
         )}
       </div>
-
       <div className="flex flex-row items-center justify-end space-x-2">
         <p className="text-xs">{timestamp}</p>
       </div>
@@ -33,9 +32,9 @@ export default function Text({ incoming, author, timestamp, content }) {
   );
 }
 Text.propTypes = {
-  incoming: PropTypes.bool.isRequired,
-  author: PropTypes.string.isRequired,
-  timestamp: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  incoming: PropTypes.bool,
+  author: PropTypes.string,
+  timestamp: PropTypes.string,
+  content: PropTypes.string,
 };
 

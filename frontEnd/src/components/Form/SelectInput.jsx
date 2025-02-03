@@ -38,5 +38,5 @@ export default function SelectInput ({ register }) {
   )
 }
 SelectInput.propTypes = {
-  register: PropTypes.func.isRequired,
+  register: PropTypes.func,
 }

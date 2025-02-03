@@ -21,8 +21,8 @@ export default function Voice({ incoming, timestamp, audioUrl }) {
   );
 }
 Voice.propTypes = {
-  incoming: PropTypes.bool.isRequired,
-  timestamp: PropTypes.string.isRequired,
-  audioUrl: PropTypes.string.isRequired,
+  incoming: PropTypes.bool,
+  timestamp: PropTypes.string,
+  audioUrl: PropTypes.string,
 };
 

@@ -5,12 +5,12 @@ const newMessageHandler = async (socket, data, io) => {
   const { message, conversationId } = data
   const { author, content, media, audioUrl, document, type, giphyUrl } = message
   try {
-    // 1. Find conversation by conversationId
+    // 1. Find the conversation by conversationId
     const conversation = await Conversation.findById(conversationId)
     if (!conversation) {
-      return socket.emit('error', { message: 'Conversation not found from newMessageHandler' })
+      return socket.emit('error', { message: 'Conversation not found' })
     }
-    // 2. Create a new message using Message Model
+    // 2. Create a new message using the Message Model
     const newMessage = await Message.create({
       author,
       content,
@@ -20,20 +20,20 @@ const newMessageHandler = async (socket, data, io) => {
       type,
       giphyUrl
     })
-    // 3. Push the messageId to messages array in conversation
+    // 3. Push messageId to messages in conversation
     conversation.messages.push(newMessage._id)
-    await conversation.save();
+    await conversation.save()
     // 4. Populate the conversation with messages and participants
     const updatedConversation = await Conversation.findById(conversationId)
       .populate('messages')
       .populate('participants')
-    // 5. Find the participants who are online (status==="Online") and have a socketId
+    // 5. Find participants who are online (status === "Online") and have a socketId
     const onlineParticipants = updatedConversation.participants.filter(
       participant => participant.status === 'Online' && participant.socketId
     )
     console.log(onlineParticipants)
-    // 6. Emit 'new-message' to online participants
-    onlineParticipants.array.forEach(participant => {
+    // 6. Emit 'new-message' event to online participants
+    onlineParticipants.forEach(participant => {
       console.log(participant.socketId)
       io.to(participant.socketId).emit('new-direct-chat', {
         conversationId: conversationId,
